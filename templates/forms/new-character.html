@@ -2,22 +2,59 @@
 {% block title %}New Character{% endblock %}
 {% block content %}
 
-  <form method="post" class="form">
-  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-    <h3 class="form-heading">Create New Character <a href="{{ url_for('home') }}" title="Back to homepage"><i class="fa fa-home pull-right"></i></a></h3>
-    {{ form.name(class_ = 'form-control first-input', placeholder = form.name.label.text, required = true, autofocus = true) }}
-      {% if form.name.errors %}
-      <div class="alert alert-danger" role="alert">
-  <span class="sr-only">Error:</span>
-  {% for error in form.name.errors %}
-          {{ error }}
-  {% endfor %}
-          </div>
-      {% endif %}
+    <form method="post" class="form">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <div class="row">
+            <div class="col.md-12">
+                <h3 class="form-heading">Create New Character <a href="{{ url_for('home') }}"
+                                                                 title="Back to homepage"><i
+                        class="fa fa-home pull-right"></i></a></h3>
+            </div>
+        </div>
 
-    {{ form.short_description(class_ = 'form-control', placeholder = 'Enter a short description for this character', required = true) }}
-      {{ form.description(class_ = 'form-control last-input', placeholder = 'Enter the full description for this character', required = true) }}
-    {{ form.related_to(class = 'form-control')}}
-    <input type="submit" value="Create Character" class="btn btn-primary btn-lg btn-block">
-  </form>
+        <div class="row">
+            <div class="col.md-12">
+                {{ form.name(class_ = 'form-control first-input', placeholder = form.name.label.text, required = true, autofocus = true) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col.md-12">
+                {% if form.name.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        <span class="sr-only">Error:</span>
+                        {% for error in form.name.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col.md-12">
+                {{ form.short_description(class_ = 'form-control', placeholder = 'Enter a short description for this character', required = true) }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col.md-12">
+                {{ form.description(class_ = 'form-control last-input', placeholder = 'Enter the full description for this character', required = true) }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col.md-6">
+                {{ form.related_to(class = 'form-control') }}
+            </div>
+            <div class="col.md-6">
+                {{ form.relationship_type(class = 'form-control') }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col.md-12">
+                <input type="submit" value="Create Character" class="btn btn-primary btn-lg btn-block">
+            </div>
+        </div>
+    </form>
 {% endblock %}

@@ -2,7 +2,6 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, Text, ForeignKey
-import sqlite3
 from app import db
 
 engine = create_engine('sqlite:///C:\\Users\\isteiner\\Downloads\\CharacterTracker\\database.db', echo=True)
@@ -32,6 +31,15 @@ class Character(Base):
         self.short_description = short_description
         self.description = description
 
+    def get_relationships(self):
+        relationships = dict()
+
+        for relationship in db_session().query(Relationship).filter(Relationship.primary == self.id):
+            related_to = db_session().query(Character).filter(Character.id == relationship.related_to)
+            relationships[related_to] = relationship.description
+
+        return relationships
+
 
 class RelationshipType(Base):
     __tablename__ = 'RelationshipType'
@@ -48,12 +56,12 @@ class Relationship(Base):
 
     primary = db.Column(db.Integer, ForeignKey('Character.id'), primary_key=True)
     related_to = db.Column(db.Integer, ForeignKey('Character.id'), primary_key=True)
-    description = db.Column(db.Integer, ForeignKey('RelationshipType.id'))
+    relationship_type = db.Column(db.Integer, ForeignKey('RelationshipType.id'))
 
     def __init__(self, primary, related_to, description):
         self.primary = primary
         self.related_to = related_to
-        self.description = description
+        self.relationship_type = description
 '''
 class User(Base):
     __tablename__ = 'Users'

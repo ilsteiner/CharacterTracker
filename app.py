@@ -62,17 +62,29 @@ def about():
 def new_character():
     other_characters = db_session().query(Character).all()
 
+    relationship_types = db_session().query(RelationshipType).all()
+
     form = NewCharacterForm(request.form)
 
-    form.related_to.query = other_characters
+    if len(other_characters) > 0:
+        form.related_to.query = other_characters
+        form.relationship_type.query = relationship_types
 
     if form.validate_on_submit():
         session = db_session()
 
+        character = Character(form.name.data, form.short_description.data, form.description.data)
+
         try:
-            character = Character(form.name.data, form.short_description.data, form.description.data)
             session.add(character)
-            session.commit()
+            session.flush()
+            session.refresh(character)
+
+            # If the related to dropdown is not blank
+            if form.related_to.data != 0:
+                relationship = Relationship(character.id, form.related_to.data, form.relationship_type.data)
+                session.add(relationship)
+                session.flush()
         except exc.IntegrityError:
             session.rollback()
             flash('Name must be unique.')
@@ -91,8 +103,8 @@ def new_relationship_type():
 
     if form.validate_on_submit():
         session = db_session()
-        type = RelationshipType(form.description)
-        session.add(type)
+        new_type = RelationshipType(form.description.data)
+        session.add(new_type)
         session.commit()
 
     else:

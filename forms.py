@@ -21,6 +21,8 @@ class NewCharacterForm(Form):
 
     related_to = QuerySelectField(get_label='name')
 
+    relationship_type = QuerySelectField(get_label='description')
+
 
 class NewRelationshipTypeForm(Form):
     description = StringField(
