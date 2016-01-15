@@ -1,0 +1,10 @@
+{% extends 'layouts/form.html' %}
+{% block title %}New Relationship Type{% endblock %}
+{% block content %}
+  <form method="post" class="form">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    <h3 class="form-heading">Create New Relationship Type <a href="{{ url_for('home') }}" title="Back to homepage"><i class="fa fa-home pull-right"></i></a></h3>
+    {{ form.description(class_ = 'form-control first-input last-input', placeholder = 'Name of relationship type', required = true, autofocus = true) }}
+    <input type="submit" value="Submit" class="btn btn-primary btn-lg btn-block">
+  </form>
+{% endblock %}

@@ -19,8 +19,10 @@ class NewCharacterForm(Form):
         'Character Description', validators=[DataRequired(), Length(min=10, max=10000)]
     )
 
-    # related_to = SelectField(
-    #         'Related To', u'Relation', coerce=int
-    # )
-
     related_to = QuerySelectField(get_label='name')
+
+
+class NewRelationshipTypeForm(Form):
+    description = StringField(
+        'Relationship Type', validators=[DataRequired(), Length(min=1, max=120)]
+    )

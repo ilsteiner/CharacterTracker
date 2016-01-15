@@ -85,6 +85,22 @@ def new_character():
     return render_template('forms/new-character.html', form=form)
 
 
+@app.route('/new-relationship-type', methods=['GET', 'POST'])
+def new_relationship_type():
+    form = NewRelationshipTypeForm(request.form)
+
+    if form.validate_on_submit():
+        session = db_session()
+        type = RelationshipType(form.description)
+        session.add(type)
+        session.commit()
+
+    else:
+        for fieldName, errorMessages in form.errors.iteritems():
+            for err in errorMessages:
+                flash(err)
+
+    return render_template('forms/new-relationship-type.html', form=form)
 # @app.route('/login')
 # def login():
 #     form = LoginForm(request.form)

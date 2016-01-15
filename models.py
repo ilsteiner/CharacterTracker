@@ -39,6 +39,9 @@ class RelationshipType(Base):
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.String(120), unique=True)
 
+    def __init__(self, description):
+        self.description = description
+
 
 class Relationship(Base):
     __tablename__ = 'Relationship'
@@ -46,6 +49,11 @@ class Relationship(Base):
     primary = db.Column(db.Integer, ForeignKey('Character.id'), primary_key=True)
     related_to = db.Column(db.Integer, ForeignKey('Character.id'), primary_key=True)
     description = db.Column(db.Integer, ForeignKey('RelationshipType.id'))
+
+    def __init__(self, primary, related_to, description):
+        self.primary = primary
+        self.related_to = related_to
+        self.description = description
 '''
 class User(Base):
     __tablename__ = 'Users'
