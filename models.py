@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, Text
+from sqlalchemy import Column, Integer, Text, ForeignKey
 import sqlite3
 from app import db
 
@@ -32,6 +32,20 @@ class Character(Base):
         self.short_description = short_description
         self.description = description
 
+
+class Relaitionship_Type(Base):
+    __tablename__ = 'Relaitionship_Type'
+
+    id = db.Column(db.Integer, primary_key=True)
+    description = db.Column(db.String(120), unique=True)
+
+
+class Relaitionship(Base):
+    __tablename__ = 'Relaitionship'
+
+    primary = db.Column(db.Integer, ForeignKey('Character.id'), primary_key=True)
+    related_to = db.Column(db.Integer, ForeignKey('Character.id'), primary_key=True)
+    description = db.Column(db.Integer, ForeignKey('Relaitionship_Type.id'))
 '''
 class User(Base):
     __tablename__ = 'Users'
