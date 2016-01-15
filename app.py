@@ -9,6 +9,7 @@ from logging import Formatter, FileHandler
 from forms import *
 from models import *
 from flask_wtf import CsrfProtect
+from sqlalchemy import exc
 
 #----------------------------------------------------------------------------#
 # App Config.
@@ -59,12 +60,23 @@ def about():
 
 @app.route('/new-character', methods=['GET', 'POST'])
 def new_character():
+    other_characters = db_session().query(Character).all()
+
     form = NewCharacterForm(request.form)
+
+    form.related_to.query = other_characters
+
     if form.validate_on_submit():
-        character = Character(form.name.data,form.short_description.data,form.description.data)
         session = db_session()
-        session.add(character)
-        session.commit()
+
+        try:
+            character = Character(form.name.data, form.short_description.data, form.description.data)
+            session.add(character)
+            session.commit()
+        except exc.IntegrityError:
+            session.rollback()
+            flash('Name must be unique.')
+
     else:
         for fieldName, errorMessages in form.errors.iteritems():
             for err in errorMessages:

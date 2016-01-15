@@ -5,9 +5,9 @@ from sqlalchemy import Column, Integer, Text, ForeignKey
 import sqlite3
 from app import db
 
-# engine = create_engine('sqlite:///C:\\Users\\isteiner\\Downloads\\CharacterTracker\\database.db', echo=True)
+engine = create_engine('sqlite:///C:\\Users\\isteiner\\Downloads\\CharacterTracker\\database.db', echo=True)
 
-engine = create_engine('sqlite:///D:\\Files\\Downloads\\CharacterTracker\\database.db', echo=True)
+# engine = create_engine('sqlite:///D:\\Files\\Downloads\\CharacterTracker\\database.db', echo=True)
 
 db_session = scoped_session(sessionmaker(autocommit=False,
                                          autoflush=False,
@@ -33,19 +33,19 @@ class Character(Base):
         self.description = description
 
 
-class Relaitionship_Type(Base):
-    __tablename__ = 'Relaitionship_Type'
+class RelationshipType(Base):
+    __tablename__ = 'RelationshipType'
 
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.String(120), unique=True)
 
 
-class Relaitionship(Base):
-    __tablename__ = 'Relaitionship'
+class Relationship(Base):
+    __tablename__ = 'Relationship'
 
     primary = db.Column(db.Integer, ForeignKey('Character.id'), primary_key=True)
     related_to = db.Column(db.Integer, ForeignKey('Character.id'), primary_key=True)
-    description = db.Column(db.Integer, ForeignKey('Relaitionship_Type.id'))
+    description = db.Column(db.Integer, ForeignKey('RelationshipType.id'))
 '''
 class User(Base):
     __tablename__ = 'Users'
