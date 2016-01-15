@@ -61,7 +61,7 @@ def about():
 def new_character():
     form = NewCharacterForm(request.form)
     if form.validate_on_submit():
-        character = Character(form.name,form.short_description,form.description)
+        character = Character(form.name.data,form.short_description.data,form.description.data)
         session = db_session()
         session.add(character)
         session.commit()
