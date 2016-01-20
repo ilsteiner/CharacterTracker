@@ -4,52 +4,91 @@
 
     <form method="post" class="form">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-        <div class="row">
-            <div class="col.md-12">
-                <h3 class="form-heading">Create New Character <a href="{{ url_for('home') }}"
-                                                                 title="Back to homepage"><i
-                        class="fa fa-home pull-right"></i></a></h3>
+        <fieldset>
+            <legend>
+                Character Information
+                <a href="{{ url_for('home') }}" title="Back to homepage"><i class="fa fa-home pull-right"></i></a>
+            </legend>
+            <div class="row">
+                <div class="col.md-12">
+                    <label for="name">{{ form.name.label.text }}</label>
+                    {{ form.name(class_ = 'form-control first-input', placeholder = 'Enter a name for this character', required = true, autofocus = true) }}
+                </div>
             </div>
-        </div>
+            <div class="row">
+                <div class="col.md-12">
+                    {% if form.name.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            <span class="sr-only">Error:</span>
+                            {% for error in form.name.errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
 
-        <div class="row">
-            <div class="col.md-12">
-                {{ form.name(class_ = 'form-control first-input', placeholder = form.name.label.text, required = true, autofocus = true) }}
+            <div class="row">
+                <div class="col.md-12">
+                    <label for="short_description">{{ form.short_description.label.text }}</label>
+                    {{ form.short_description(class_ = 'form-control', placeholder = 'Enter a short description for this character', required = true) }}
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col.md-12">
-                {% if form.name.errors %}
-                    <div class="alert alert-danger" role="alert">
-                        <span class="sr-only">Error:</span>
-                        {% for error in form.name.errors %}
-                            {{ error }}
-                        {% endfor %}
+
+            <div class="row">
+                <div class="col.md-12">
+                    <label for="description">{{ form.description.label.text }}</label>
+                    {{ form.description(class_ = 'form-control last-input', placeholder = 'Enter the full description for this character', required = true) }}
+                </div>
+            </div>
+        </fieldset>
+
+        {#    {{ form.relationships }}#}
+
+        <fieldset>
+            <legend>
+                Relationships
+            </legend>
+            {#            <div class="row">#}
+            {#                    <div class="col.md-6">#}
+            {#                        <label for="related_to">Has a relationship with</label>#}
+            {#                        {{ form.relationships.related_to(class = 'form-control') }}#}
+            {#                    </div>#}
+            {#                    <div class="col.md-6">#}
+            {#                        <label for="relationship_type">Relationship Type</label>#}
+            {#                        {{ form.relationships.relationship_type(class = 'form-control', placeholder = 'Enter one or two words') }}#}
+            {#                    </div>#}
+            {#                </div>#}
+            {##}
+            {#                <div class="row">#}
+            {#                    <div class="col.md-6">#}
+            {#                        <label for="relationship_description">Relationship Description</label>#}
+            {#                        {{ form.relationships.relationship_description(class = 'form-control', placeholder = 'Describe the relationship') }}#}
+            {#                    </div>#}
+            {#                </div>#}
+
+            {% if form.relationships %}
+                {% for relationship in form.relationships %}
+                    <div class="row">
+                        <div class="col.md-6">
+                            <label for="related_to">Has a relationship with</label>
+                            {{ relationship.related_to(class = 'form-control') }}
+                        </div>
+                        <div class="col.md-6">
+                            <label for="relationship_type">Relationship Type</label>
+                            {{ relationship.relationship_type(class = 'form-control', placeholder = 'Enter one or two words') }}
+                        </div>
                     </div>
-                {% endif %}
-            </div>
-        </div>
 
-        <div class="row">
-            <div class="col.md-12">
-                {{ form.short_description(class_ = 'form-control', placeholder = 'Enter a short description for this character', required = true) }}
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col.md-12">
-                {{ form.description(class_ = 'form-control last-input', placeholder = 'Enter the full description for this character', required = true) }}
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col.md-6">
-                {{ form.related_to(class = 'form-control') }}
-            </div>
-            <div class="col.md-6">
-                {{ form.relationship_type(class = 'form-control') }}
-            </div>
-        </div>
+                    <div class="row">
+                        <div class="col.md-6">
+                            <label for="relationship_description">Relationship Description</label>
+                            {{ relationship.relationship_description(class = 'form-control', placeholder = 'Describe the relationship') }}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </fieldset>
 
         <div class="row">
             <div class="col.md-12">

@@ -58,17 +58,20 @@ def about():
     return render_template('pages/placeholder.about.html')
 
 
+@app.route('/test-relationship')
+def test_relationship():
+    form = RelationshipForm(request.form)
+    form.related_to.query = Character.query
+    return render_template('forms/test-relationship.html',form=form)
+
+
 @app.route('/new-character', methods=['GET', 'POST'])
 def new_character():
-    other_characters = db_session().query(Character).all()
-
-    relationship_types = db_session().query(RelationshipType).all()
-
     form = NewCharacterForm(request.form)
 
-    if len(other_characters) > 0:
-        form.related_to.query = other_characters
-        form.relationship_type.query = relationship_types
+    # relationship_form = RelationshipForm(request.form)
+
+    # relationship_form.related_to.query = Character.query
 
     if form.validate_on_submit():
         session = db_session()
@@ -81,13 +84,16 @@ def new_character():
             session.refresh(character)
 
             # If the related to dropdown is not blank
-            if form.related_to.data != 0:
-                relationship = Relationship(character.id, form.related_to.data, form.relationship_type.data)
-                session.add(relationship)
-                session.flush()
-        except exc.IntegrityError:
+            for relationship in form.relationships:
+                if relationship.related_to.data:
+                    new_relationship = Relationship(character.id, relationship.related_to.data.id,
+                                                    relationship.relationship_type.data,
+                                                    relationship.relationship_description.data)
+                    session.add(new_relationship)
+                    session.flush()
+        except (exc.IntegrityError, exc.InvalidRequestError) as e:
             session.rollback()
-            flash('Name must be unique.')
+            flash(e.message)
 
     else:
         for fieldName, errorMessages in form.errors.iteritems():
@@ -97,22 +103,27 @@ def new_character():
     return render_template('forms/new-character.html', form=form)
 
 
-@app.route('/new-relationship-type', methods=['GET', 'POST'])
-def new_relationship_type():
-    form = NewRelationshipTypeForm(request.form)
-
-    if form.validate_on_submit():
-        session = db_session()
-        new_type = RelationshipType(form.description.data)
-        session.add(new_type)
-        session.commit()
-
-    else:
-        for fieldName, errorMessages in form.errors.iteritems():
-            for err in errorMessages:
-                flash(err)
-
-    return render_template('forms/new-relationship-type.html', form=form)
+# @app.route('/new-relationship-type', methods=['GET', 'POST'])
+# def new_relationship_type():
+#     form = NewRelationshipTypeForm(request.form)
+#
+#     session = db_session()
+#
+#     try:
+#         if form.validate_on_submit():
+#             new_type = RelationshipType(form.description.data)
+#             session.add(new_type)
+#             session.commit()
+#
+#         else:
+#             for fieldName, errorMessages in form.errors.iteritems():
+#                 for err in errorMessages:
+#                     flash(err)
+#     except exc.IntegrityError:
+#             session.rollback()
+#             flash('Must be unique.')
+#
+#     return render_template('forms/new-relationship-type.html', form=form)
 # @app.route('/login')
 # def login():
 #     form = LoginForm(request.form)

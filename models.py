@@ -41,14 +41,14 @@ class Character(Base):
         return relationships
 
 
-class RelationshipType(Base):
-    __tablename__ = 'RelationshipType'
-
-    id = db.Column(db.Integer, primary_key=True)
-    description = db.Column(db.String(120), unique=True)
-
-    def __init__(self, description):
-        self.description = description
+# class RelationshipType(Base):
+#     __tablename__ = 'RelationshipType'
+#
+#     id = db.Column(db.Integer, primary_key=True)
+#     description = db.Column(db.String(120), unique=True)
+#
+#     def __init__(self, description):
+#         self.description = description
 
 
 class Relationship(Base):
@@ -56,12 +56,14 @@ class Relationship(Base):
 
     primary = db.Column(db.Integer, ForeignKey('Character.id'), primary_key=True)
     related_to = db.Column(db.Integer, ForeignKey('Character.id'), primary_key=True)
-    relationship_type = db.Column(db.Integer, ForeignKey('RelationshipType.id'))
+    relationship_type = db.Column(db.String(100))
+    relationship_description = db.Column(db.String(2056))
 
-    def __init__(self, primary, related_to, description):
+    def __init__(self, primary, related_to, relationship_type, description):
         self.primary = primary
         self.related_to = related_to
-        self.relationship_type = description
+        self.relationship_type = relationship_type
+        self.relationship_description = description
 '''
 class User(Base):
     __tablename__ = 'Users'
@@ -75,6 +77,14 @@ class User(Base):
         self.name = name
         self.password = password
 '''
+
+
+def character_count():
+    return db_session().query(Character).count()
+
+
+def relationship_count():
+    return db_session().query(Relationship).count()
 
 # Create tables.
 Base.metadata.create_all(bind=engine)

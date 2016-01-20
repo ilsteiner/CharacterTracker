@@ -1,0 +1,37 @@
+{% extends 'layouts/form.html' %}
+{% block title %}New Character{% endblock %}
+{% block content %}
+
+    <form method="post" class="form">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+
+        <fieldset>
+            <legend>
+                Relationships
+            </legend>
+                <div class="row">
+                    <div class="col.md-6">
+                        <label for="related_to">Has a relationship with</label>
+                        {{ form.related_to(class = 'form-control') }}
+                    </div>
+                    <div class="col.md-6">
+                        <label for="relationship_type">Relationship Type</label>
+                        {{ form.relationship_type(class = 'form-control', placeholder = 'Enter one or two words') }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col.md-6">
+                        <label for="relationship_description">Relationship Description</label>
+                        {{ form.relationship_description(class = 'form-control', placeholder = 'Describe the relationship') }}
+                    </div>
+                </div>
+        </fieldset>
+
+        <div class="row">
+            <div class="col.md-12">
+                <input type="submit" value="Create Relationship" class="btn btn-primary btn-lg btn-block">
+            </div>
+        </div>
+    </form>
+{% endblock %}
