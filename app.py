@@ -58,11 +58,21 @@ def about():
     return render_template('pages/placeholder.about.html')
 
 
-@app.route('/test-relationship')
+@app.route('/test-relationship', methods=['GET', 'POST'])
 def test_relationship():
     form = RelationshipForm(request.form)
     form.related_to.query = Character.query
-    return render_template('forms/test-relationship.html',form=form)
+
+    session = db_session()
+    try:
+        if form.validate_on_submit():
+            new_relationship = Relationship(1, 2, form.relationship_type.data, form.relationship_description.data)
+            session.add(new_relationship)
+            session.flush()
+    except (exc.IntegrityError, exc.InvalidRequestError) as e:
+            session.rollback()
+            flash(e.message)
+    return render_template('forms/test-relationship.html', form=form)
 
 
 @app.route('/new-character', methods=['GET', 'POST'])
@@ -72,6 +82,8 @@ def new_character():
     # relationship_form = RelationshipForm(request.form)
 
     # relationship_form.related_to.query = Character.query
+
+    # form.relationships.append_entry([0, '', ''])
 
     if form.validate_on_submit():
         session = db_session()

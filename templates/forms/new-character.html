@@ -43,29 +43,28 @@
             </div>
         </fieldset>
 
-        {#    {{ form.relationships }}#}
-
         <fieldset>
             <legend>
                 Relationships
             </legend>
             {#            <div class="row">#}
-            {#                    <div class="col.md-6">#}
-            {#                        <label for="related_to">Has a relationship with</label>#}
-            {#                        {{ form.relationships.related_to(class = 'form-control') }}#}
-            {#                    </div>#}
-            {#                    <div class="col.md-6">#}
-            {#                        <label for="relationship_type">Relationship Type</label>#}
-            {#                        {{ form.relationships.relationship_type(class = 'form-control', placeholder = 'Enter one or two words') }}#}
-            {#                    </div>#}
+            {#                <div class="col.md-6">#}
+            {#                    <label for="related_to">Has a relationship with</label>#}
+            {#                    {{ form.relationships.related_to(class = 'form-control') }}#}
             {#                </div>#}
+            {#                <div class="col.md-6">#}
+            {#                    <label for="relationship_type">Relationship Type</label>#}
+            {#                    {{ form.relationships.relationship_type(class = 'form-control', placeholder = 'Enter one or two words') }}#}
+            {#                </div>#}
+            {#            </div>#}
             {##}
-            {#                <div class="row">#}
-            {#                    <div class="col.md-6">#}
-            {#                        <label for="relationship_description">Relationship Description</label>#}
-            {#                        {{ form.relationships.relationship_description(class = 'form-control', placeholder = 'Describe the relationship') }}#}
-            {#                    </div>#}
+            {#            <div class="row">#}
+            {#                <div class="col.md-6">#}
+            {#                    <label for="relationship_description">Relationship Description</label>#}
+            {#                    {{ form.relationships.relationship_description(class = 'form-control', placeholder = 'Describe the relationship') }}#}
             {#                </div>#}
+            {#            </div>#}
+
 
             {% if form.relationships %}
                 {% for relationship in form.relationships %}
