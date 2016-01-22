@@ -2,7 +2,7 @@ from flask_wtf import Form
 from wtforms import StringField, TextAreaField, FieldList, FormField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.validators import DataRequired, Length, Required, Optional
-from models import character_count, relationship_count
+from models import Character
 
 # Set your classes here.
 
@@ -26,6 +26,8 @@ class RequiredIf(Required):
 class RelationshipForm(Form):
     related_to = QuerySelectField(get_label='name', validators=[Optional()])
 
+    related_to.query = Character.query
+
     relationship_type = StringField(
         'Relationship Type', validators=[RequiredIf('related_to')]
     )
@@ -48,7 +50,7 @@ class NewCharacterForm(Form):
         'Character Description', validators=[DataRequired(), Length(min=10, max=10000)]
     )
 
-    relationships = FieldList(FormField(RelationshipForm), validators=[Optional()])
+    relationships = FieldList(FormField(RelationshipForm), validators=[Optional()], min_entries=1)
 
 # class NewRelationshipTypeForm(Form):
 #     description = StringField(

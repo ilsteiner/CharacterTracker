@@ -43,51 +43,45 @@
             </div>
         </fieldset>
 
-        <fieldset>
-            <legend>
-                Relationships
-            </legend>
-            {#            <div class="row">#}
-            {#                <div class="col.md-6">#}
-            {#                    <label for="related_to">Has a relationship with</label>#}
-            {#                    {{ form.relationships.related_to(class = 'form-control') }}#}
-            {#                </div>#}
-            {#                <div class="col.md-6">#}
-            {#                    <label for="relationship_type">Relationship Type</label>#}
-            {#                    {{ form.relationships.relationship_type(class = 'form-control', placeholder = 'Enter one or two words') }}#}
-            {#                </div>#}
-            {#            </div>#}
-            {##}
-            {#            <div class="row">#}
-            {#                <div class="col.md-6">#}
-            {#                    <label for="relationship_description">Relationship Description</label>#}
-            {#                    {{ form.relationships.relationship_description(class = 'form-control', placeholder = 'Describe the relationship') }}#}
-            {#                </div>#}
-            {#            </div>#}
+        {% if character_count %}
+            <fieldset>
+                <legend>
+                    Relationships
+                </legend>
 
+{#            <button type="button" class="btn btn-default" aria-label="Right Align">#}
+{#                <span class="glyphicon glyphicon-align-right" aria-hidden="true"></span>#}
+{#            </button>#}
 
-            {% if form.relationships %}
+            <button type="button" class="btn btn-default">
+                <span class="glyphicon glyphicon-align-right hidden"></span>
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Relationship
+            </button>
+
                 {% for relationship in form.relationships %}
-                    <div class="row">
-                        <div class="col.md-6">
-                            <label for="related_to">Has a relationship with</label>
-                            {{ relationship.related_to(class = 'form-control') }}
+                    <div class="relationship">
+                        <div class="row">
+                            <div class="col.sm-6">
+                                <label for="related_to">Has a relationship with</label>
+                                {{ relationship.related_to(class = 'form-control') }}
+                            </div>
+                            <div class="col.sm-6">
+                                <label for="relationship_type">Relationship Type</label>
+                                {{ relationship.relationship_type(class = 'form-control', placeholder = 'Enter one or two words') }}
+                            </div>
                         </div>
-                        <div class="col.md-6">
-                            <label for="relationship_type">Relationship Type</label>
-                            {{ relationship.relationship_type(class = 'form-control', placeholder = 'Enter one or two words') }}
-                        </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col.md-6">
-                            <label for="relationship_description">Relationship Description</label>
-                            {{ relationship.relationship_description(class = 'form-control', placeholder = 'Describe the relationship') }}
+                        <div class="row">
+                            <div class="col.md-6">
+                                <label for="relationship_description">Relationship Description</label>
+                                {{ relationship.relationship_description(class = 'form-control', placeholder = 'Describe the relationship') }}
+                            </div>
                         </div>
                     </div>
                 {% endfor %}
-            {% endif %}
-        </fieldset>
+
+            </fieldset>
+        {% endif %}
 
         <div class="row">
             <div class="col.md-12">

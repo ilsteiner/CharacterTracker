@@ -64,19 +64,6 @@ class Relationship(Base):
         self.related_to = related_to
         self.relationship_type = relationship_type
         self.relationship_description = description
-'''
-class User(Base):
-    __tablename__ = 'Users'
-
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(120), unique=True)
-    email = db.Column(db.String(120), unique=True)
-    password = db.Column(db.String(30))
-
-    def __init__(self, name=None, password=None):
-        self.name = name
-        self.password = password
-'''
 
 
 def character_count():

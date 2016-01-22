@@ -58,32 +58,12 @@ def about():
     return render_template('pages/placeholder.about.html')
 
 
-@app.route('/test-relationship', methods=['GET', 'POST'])
-def test_relationship():
-    form = RelationshipForm(request.form)
-    form.related_to.query = Character.query
-
-    session = db_session()
-    try:
-        if form.validate_on_submit():
-            new_relationship = Relationship(1, 2, form.relationship_type.data, form.relationship_description.data)
-            session.add(new_relationship)
-            session.flush()
-    except (exc.IntegrityError, exc.InvalidRequestError) as e:
-            session.rollback()
-            flash(e.message)
-    return render_template('forms/test-relationship.html', form=form)
-
-
 @app.route('/new-character', methods=['GET', 'POST'])
 def new_character():
     form = NewCharacterForm(request.form)
 
-    # relationship_form = RelationshipForm(request.form)
-
-    # relationship_form.related_to.query = Character.query
-
-    # form.relationships.append_entry([0, '', ''])
+    for relationship in form.relationships:
+        relationship.related_to.query = Character.query
 
     if form.validate_on_submit():
         session = db_session()
@@ -95,14 +75,16 @@ def new_character():
             session.flush()
             session.refresh(character)
 
-            # If the related to dropdown is not blank
-            for relationship in form.relationships:
-                if relationship.related_to.data:
-                    new_relationship = Relationship(character.id, relationship.related_to.data.id,
-                                                    relationship.relationship_type.data,
-                                                    relationship.relationship_description.data)
-                    session.add(new_relationship)
-                    session.flush()
+            # If there are characters to be related to and thus the relationship form was displayed
+            if character_count() > 1:
+                for relationship in form.relationships:
+                    # If the related to dropdown is not blank
+                    if relationship.related_to.data:
+                        new_relationship = Relationship(character.id, relationship.related_to.data.id,
+                                                        relationship.relationship_type.data,
+                                                        relationship.relationship_description.data)
+                        session.add(new_relationship)
+                        session.flush()
         except (exc.IntegrityError, exc.InvalidRequestError) as e:
             session.rollback()
             flash(e.message)
@@ -112,7 +94,7 @@ def new_character():
             for err in errorMessages:
                 flash(err)
 
-    return render_template('forms/new-character.html', form=form)
+    return render_template('forms/new-character.html', form=form, character_count=character_count())
 
 
 # @app.route('/new-relationship-type', methods=['GET', 'POST'])
