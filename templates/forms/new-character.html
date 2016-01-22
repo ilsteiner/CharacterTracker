@@ -59,11 +59,14 @@
             </button>
 
                 {% for relationship in form.relationships %}
-                    <div class="relationship">
+                    <fieldset class="relationship">
+                    <legend class="sub-legend">
+                        New Relationship
+                    </legend>
                         <div class="row">
                             <div class="col.sm-6">
                                 <label for="related_to">Has a relationship with</label>
-                                {{ relationship.related_to(class = 'form-control') }}
+                                {{ relationship.related_to(class = 'form-control related_to') }}
                             </div>
                             <div class="col.sm-6">
                                 <label for="relationship_type">Relationship Type</label>
@@ -77,7 +80,7 @@
                                 {{ relationship.relationship_description(class = 'form-control', placeholder = 'Describe the relationship') }}
                             </div>
                         </div>
-                    </div>
+                    </fieldset>
                 {% endfor %}
 
             </fieldset>

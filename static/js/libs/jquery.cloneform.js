@@ -1,7 +1,7 @@
 //The jQuery Setup
 $(document).ready(function(){
 	
-	$('#insert-new').on.click(function(){
+	$('#insert-new').click(function(){
 		var yourclass=".relationship";  //The class you have used in your form
 		var clonecount = $(yourclass).length;	//how many clones do we already have?
 		var newid = Number(clonecount);		//Id of the new clone, we're zero indexed so don't add 1
