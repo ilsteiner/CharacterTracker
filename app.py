@@ -74,9 +74,11 @@ def new_character():
             session.add(character)
             session.flush()
             session.refresh(character)
+            flash(character.name + ' created')
 
             # If there are characters to be related to and thus the relationship form was displayed
             if character_count() > 1:
+                new_relationships = 0
                 for relationship in form.relationships:
                     # If the related to dropdown is not blank
                     if relationship.related_to.data:
@@ -85,6 +87,12 @@ def new_character():
                                                         relationship.relationship_description.data)
                         session.add(new_relationship)
                         session.flush()
+                        new_relationships += 1
+
+                if new_relationships == 1:
+                    flash('Created ' + str(new_relationships) + ' new character relationship')
+                elif new_relationships >0:
+                    flash('Created ' + str(new_relationships) + ' new character relationships')
         except (exc.IntegrityError, exc.InvalidRequestError) as e:
             session.rollback()
             flash(e.message)
@@ -149,7 +157,8 @@ def not_found_error(error):
     return render_template('errors/404.html'), 404
 
 if not app.debug:
-    file_handler = FileHandler('error.log')
+    file_handler = FileHandler('C:\Users\isteiner\Downloads\CharacterTracker\error.log')
+    # file_handler = FileHandler('error.log')
     file_handler.setFormatter(
         Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]')
     )
