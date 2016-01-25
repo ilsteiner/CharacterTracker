@@ -50,6 +50,12 @@ $(document).ready(function () {
             //Fix the legend for the fieldset
             $(fieldclone).find('legend').html('New Relationship');
 
+            //Fix the collapse link
+            $(fieldclone).find('a').attr('href','#collapse-'+options.newid_);
+
+            //Fix the collapse div
+            $(fieldclone).find('.collapse').attr('id','collapse-'+options.newid_);
+
             //==> Locate Target Id <==//
             var targetid = $(settings.target_).attr("id");
             if (targetid.length <= 0) {
@@ -59,7 +65,7 @@ $(document).ready(function () {
 
             //==> Insert Clone <==//
             var newhtml = $(fieldclone).html().replace(/\n/gi, "");
-            newhtml = '<' + node + ' class="' + classes + '" id="' + 8 + '">' + newhtml + '</' + node + '>';
+            newhtml = '<' + node + ' class="' + classes + '">' + newhtml + '</' + node + '>';
 
             eval("var insertCall = $('#" + targetid + "')." + settings.insert_ + "(newhtml)");
         }
