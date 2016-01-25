@@ -42,7 +42,78 @@
             </fieldset>
         </div>
 
-        {% if character_count %}
+    {% if character_count %}
+            <div class="col-md-12">
+                <fieldset>
+                    <legend>
+                        Relationships
+                        <button type="button" class="btn btn-default" id="insert-new">
+                            <span class="glyphicon glyphicon-align-right hidden"></span>
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Relationship
+                        </button>
+                    </legend>
+
+                    {% for relationship in form.relationships %}
+                        <fieldset class="relationship">
+                            <a href="#collapse-{{ loop.index0 }}" data-toggle="collapse">
+                                <legend class="sub-legend">
+                                    New Relationship
+                                </legend>
+                            </a>
+                            <div id="collapse-{{ loop.index0 }}" class="collapse{% if loop.index0 == 0 %} in {% endif %}">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <label for="related_to">Has a relationship with</label>
+                                        {{ relationship.related_to(class = 'form-control related_to') }}
+                                    </div>
+                                    <div class="col-md-5">
+                                        <label for="relationship_type">Relationship Type</label>
+                                        {{ relationship.relationship_type(class = 'form-control', placeholder = 'Enter one or two words') }}
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <label for="relationship_bidirectional">{{ relationship.bidirectional.label.text }}</label>
+                                        {{ relationship.bidirectional(class = 'form-control', **{'data-style':'btn-group-justified'}) }}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label for="relationship_description">Relationship Description</label>
+                                        {{ relationship.relationship_description(class = 'form-control', placeholder = 'Describe the relationship') }}
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <fieldset>
+                                            <legend>
+                                                Bidirectional Relationship
+                                            </legend>
+                                        </fieldset>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label for="other_relationship_">Relationship Type</label>
+                                                {{ relationship.other_relationship_description(class = 'form-control', placeholder = 'Describe the relationship') }}
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label for="other_relationship_description">Relationship
+                                                    Description</label>
+                                                {{ relationship.other_relationship_description(class = 'form-control', placeholder = 'Describe the relationship') }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    {% endfor %}
+
+                </fieldset>
+            </div>
+        {% endif %}
+
+        {#{% if character_count %}
             <div class="col-md-12">
                 <fieldset>
                     <legend>
@@ -59,13 +130,18 @@
                                 New Relationship
                             </legend>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-5">
                                     <label for="related_to">Has a relationship with</label>
                                     {{ relationship.related_to(class = 'form-control related_to') }}
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-5">
                                     <label for="relationship_type">Relationship Type</label>
                                     {{ relationship.relationship_type(class = 'form-control', placeholder = 'Enter one or two words') }}
+                                </div>
+
+                                <div class="col-md-2">
+                                    <label for="relationship_bidirectional">{{ relationship.bidirectional.label.text }}</label>
+                                    {{ relationship.bidirectional(class = 'form-control', **{'data-style':'btn-group-justified'}) }}
                                 </div>
                             </div>
 
@@ -75,12 +151,33 @@
                                     {{ relationship.relationship_description(class = 'form-control', placeholder = 'Describe the relationship') }}
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <fieldset>
+                                        <legend>
+                                            Bidirectional Relationship
+                                        </legend>
+                                    </fieldset>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label for="other_relationship_">Relationship Type</label>
+                                            {{ relationship.other_relationship_description(class = 'form-control', placeholder = 'Describe the relationship') }}
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label for="other_relationship_description">Relationship Description</label>
+                                            {{ relationship.other_relationship_description(class = 'form-control', placeholder = 'Describe the relationship') }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </fieldset>
                     {% endfor %}
 
                 </fieldset>
             </div>
-        {% endif %}
+        {% endif %}#}
 
         <div class="row">
             <div class="col-md-12">

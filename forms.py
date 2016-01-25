@@ -1,5 +1,5 @@
 from flask_wtf import Form
-from wtforms import StringField, TextAreaField, FieldList, FormField
+from wtforms import StringField, TextAreaField, FieldList, FormField, BooleanField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.validators import DataRequired, Length, Required, Optional
 from models import Character
@@ -32,7 +32,19 @@ class RelationshipForm(Form):
         'Relationship Type', validators=[RequiredIf('related_to')]
     )
 
-    relationship_description = StringField(
+    relationship_description = TextAreaField(
+        'Relationship Description', validators=[RequiredIf('related_to')]
+    )
+
+    bidirectional = BooleanField(
+        'Bidirectional?'
+    )
+
+    other_relationship_type = StringField(
+        'Relationship Type', validators=[RequiredIf('related_to')]
+    )
+
+    other_relationship_description = StringField(
         'Relationship Description', validators=[RequiredIf('related_to')]
     )
 
