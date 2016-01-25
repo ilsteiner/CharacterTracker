@@ -12,6 +12,7 @@ $(document).ready(function () {
             insert_: "after",					//where do we insert the clone? (after/before/append/prepend...)
             limit_: 10							//Maximum Number of Clones
         });
+
         return false;
     });
 });
@@ -62,6 +63,9 @@ $(document).ready(function () {
                 targetid = "clonetarget";
                 $(settings.target_).attr("id", targetid);
             }
+
+            //Collapse existing rows
+            //$('.relationship .collapse').removeClass('in').each($(this).collapse());
 
             //==> Insert Clone <==//
             var newhtml = $(fieldclone).html().replace(/\n/gi, "");
