@@ -4,90 +4,86 @@
 
     <form method="post" class="form">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-        <fieldset>
-            <legend>
-                Character Information
-                <a href="{{ url_for('home') }}" title="Back to homepage"><i class="fa fa-home pull-right"></i></a>
-            </legend>
-            <div class="row">
-                <div class="col.md-12">
-                    <label for="name">{{ form.name.label.text }}</label>
-                    {{ form.name(class_ = 'form-control first-input', placeholder = 'Enter a name for this character', required = true, autofocus = true) }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col.md-12">
-                    {% if form.name.errors %}
-                        <div class="alert alert-danger" role="alert">
-                            <span class="sr-only">Error:</span>
-                            {% for error in form.name.errors %}
-                                {{ error }}
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col.md-12">
-                    <label for="short_description">{{ form.short_description.label.text }}</label>
-                    {{ form.short_description(class_ = 'form-control', placeholder = 'Enter a short description for this character', required = true) }}
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col.md-12">
-                    <label for="description">{{ form.description.label.text }}</label>
-                    {{ form.description(class_ = 'form-control last-input', placeholder = 'Enter the full description for this character', required = true) }}
-                </div>
-            </div>
-        </fieldset>
-
-        {% if character_count %}
+        <div class="col-md-12">
             <fieldset>
                 <legend>
-                    Relationships
+                    Character Information
+                    <a href="{{ url_for('home') }}" title="Back to homepage"><i class="fa fa-home pull-right"></i></a>
                 </legend>
-
-{#            <button type="button" class="btn btn-default" aria-label="Right Align">#}
-{#                <span class="glyphicon glyphicon-align-right" aria-hidden="true"></span>#}
-{#            </button>#}
-
-            <button type="button" class="btn btn-default" id="insert-new">
-                <span class="glyphicon glyphicon-align-right hidden"></span>
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Relationship
-            </button>
-
-                {% for relationship in form.relationships %}
-                    <fieldset class="relationship">
-                    <legend class="sub-legend">
-                        New Relationship
-                    </legend>
-                        <div class="row">
-                            <div class="col.sm-6">
-                                <label for="related_to">Has a relationship with</label>
-                                {{ relationship.related_to(class = 'form-control related_to') }}
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="name">{{ form.name.label.text }}</label>
+                        {{ form.name(class_ = 'form-control first-input', placeholder = 'Enter a name for this character', required = true, autofocus = true) }}
+                    </div>
+                    <div class="col-md-6">
+                        <label for="short_description">{{ form.short_description.label.text }}</label>
+                        {{ form.short_description(class_ = 'form-control', placeholder = 'Enter a short description for this character', required = true) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        {% if form.name.errors %}
+                            <div class="alert alert-danger" role="alert">
+                                <span class="sr-only">Error:</span>
+                                {% for error in form.name.errors %}
+                                    {{ error }}
+                                {% endfor %}
                             </div>
-                            <div class="col.sm-6">
-                                <label for="relationship_type">Relationship Type</label>
-                                {{ relationship.relationship_type(class = 'form-control', placeholder = 'Enter one or two words') }}
-                            </div>
-                        </div>
+                        {% endif %}
+                    </div>
+                </div>
 
-                        <div class="row">
-                            <div class="col.md-6">
-                                <label for="relationship_description">Relationship Description</label>
-                                {{ relationship.relationship_description(class = 'form-control', placeholder = 'Describe the relationship') }}
-                            </div>
-                        </div>
-                    </fieldset>
-                {% endfor %}
-
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="description">{{ form.description.label.text }}</label>
+                        {{ form.description(class_ = 'form-control last-input', placeholder = 'Enter the full description for this character', required = true) }}
+                    </div>
+                </div>
             </fieldset>
+        </div>
+
+        {% if character_count %}
+            <div class="col-md-12">
+                <fieldset>
+                    <legend>
+                        Relationships
+                        <button type="button" class="btn btn-default" id="insert-new">
+                            <span class="glyphicon glyphicon-align-right hidden"></span>
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Relationship
+                        </button>
+                    </legend>
+
+                    {% for relationship in form.relationships %}
+                        <fieldset class="relationship">
+                            <legend class="sub-legend">
+                                New Relationship
+                            </legend>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="related_to">Has a relationship with</label>
+                                    {{ relationship.related_to(class = 'form-control related_to') }}
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="relationship_type">Relationship Type</label>
+                                    {{ relationship.relationship_type(class = 'form-control', placeholder = 'Enter one or two words') }}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label for="relationship_description">Relationship Description</label>
+                                    {{ relationship.relationship_description(class = 'form-control', placeholder = 'Describe the relationship') }}
+                                </div>
+                            </div>
+                        </fieldset>
+                    {% endfor %}
+
+                </fieldset>
+            </div>
         {% endif %}
 
         <div class="row">
-            <div class="col.md-12">
+            <div class="col-md-12">
                 <input type="submit" value="Create Character" class="btn btn-primary btn-lg btn-block">
             </div>
         </div>
