@@ -4,9 +4,9 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, Text, ForeignKey
 from app import db
 
-engine = create_engine('sqlite:///C:\\Users\\isteiner\\Downloads\\CharacterTracker\\database.db', echo=True)
+# engine = create_engine('sqlite:///C:\\Users\\isteiner\\Downloads\\CharacterTracker\\database.db', echo=True)
 
-# engine = create_engine('sqlite:///D:\\Files\\Downloads\\CharacterTracker\\database.db', echo=True)
+engine = create_engine('sqlite:///D:\\Files\\Downloads\\CharacterTracker\\database.db', echo=True)
 
 db_session = scoped_session(sessionmaker(autocommit=False,
                                          autoflush=False,
@@ -72,6 +72,7 @@ def character_count():
 
 def relationship_count():
     return db_session().query(Relationship).count()
+
 
 # Create tables.
 Base.metadata.create_all(bind=engine)

@@ -2,14 +2,17 @@
 # Imports
 #----------------------------------------------------------------------------#
 
-from flask import Flask, render_template, request, flash
+from flask import Flask, render_template, request, flash, redirect
 from flask.ext.sqlalchemy import SQLAlchemy
 import logging
-from logging import Formatter, FileHandler
+from logging import Formatter
+from logging.handlers import RotatingFileHandler
 from forms import *
 from models import *
 from flask_wtf import CsrfProtect
 from sqlalchemy import exc
+import os
+from graph import make_graph
 
 #----------------------------------------------------------------------------#
 # App Config.
@@ -50,12 +53,13 @@ def login_required(test):
 def home():
     session = db_session()
     characters = session.query(Character).all()
-    return render_template('pages/home.html', characters=characters)
+    return render_template('pages/home.html', characters=characters, graph=make_graph())
 
 
-@app.route('/about')
-def about():
-    return render_template('pages/placeholder.about.html')
+@app.route('/populate-data', methods=['POST'])
+def populate_data():
+    populate_sample_data()
+    return redirect('/', code=302)
 
 
 @app.route('/new-character', methods=['GET', 'POST'])
@@ -103,7 +107,6 @@ def new_character():
                 flash(err)
 
     return render_template('forms/new-character.html', form=form, character_count=character_count())
-
 
 # @app.route('/new-relationship-type', methods=['GET', 'POST'])
 # def new_relationship_type():
@@ -157,8 +160,12 @@ def not_found_error(error):
     return render_template('errors/404.html'), 404
 
 if not app.debug:
-    file_handler = FileHandler('C:\Users\isteiner\Downloads\CharacterTracker\error.log')
-    # file_handler = FileHandler('error.log')
+    current_directory = os.path.dirname(__file__)
+
+    error_log = os.path.join(current_directory, 'error.log')
+
+    file_handler = RotatingFileHandler(error_log, maxBytes=10000, backupCount=1)
+
     file_handler.setFormatter(
         Formatter('%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]')
     )
@@ -166,6 +173,25 @@ if not app.debug:
     file_handler.setLevel(logging.INFO)
     app.logger.addHandler(file_handler)
     app.logger.info('errors')
+
+
+def populate_sample_data():
+    current_directory = os.path.dirname(__file__)
+
+    filename = os.path.join(current_directory, 'sample_names.txt')
+
+    try:
+        with open(filename) as sample_names:
+            just_names = (line.rstrip('\n') for line in sample_names)
+            for name in just_names:
+
+                    character = Character(name, "This a short description of " + name,"This is a long description of " + name)
+                    session = db_session()
+                    session.add(character)
+                    session.flush()
+    except exc.IntegrityError as e:
+                session.rollback()
+                app.logger.info('Could not insert ' + name + ': ' + e.message)
 
 #----------------------------------------------------------------------------#
 # Launch.
