@@ -86,6 +86,6 @@ function update_graph() {
 }
 
 $(function () {
-    
+
     //show_json();
 });
