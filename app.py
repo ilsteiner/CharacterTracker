@@ -23,6 +23,8 @@ csrf = CsrfProtect(app)
 app.config.from_object('config')
 db = SQLAlchemy(app)
 
+current_directory = os.path.dirname(__file__)
+
 app.secret_key = 'tB3*fHq2Xp@VZv#Hw65p2be^fZ#SGaOWYRNSCYCSu^*bkh7YqM'
 
 # Automatically tear down SQLAlchemy.
@@ -160,8 +162,6 @@ def not_found_error(error):
     return render_template('errors/404.html'), 404
 
 if not app.debug:
-    current_directory = os.path.dirname(__file__)
-
     error_log = os.path.join(current_directory, 'error.log')
 
     file_handler = RotatingFileHandler(error_log, maxBytes=10000, backupCount=1)
@@ -176,17 +176,16 @@ if not app.debug:
 
 
 def populate_sample_data():
-    current_directory = os.path.dirname(__file__)
-
     filename = os.path.join(current_directory, 'sample_names.txt')
+
+    session = db_session()
 
     try:
         with open(filename) as sample_names:
             just_names = (line.rstrip('\n') for line in sample_names)
             for name in just_names:
-
                     character = Character(name, "This a short description of " + name,"This is a long description of " + name)
-                    session = db_session()
+
                     session.add(character)
                     session.flush()
     except exc.IntegrityError as e:
