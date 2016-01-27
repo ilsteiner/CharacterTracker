@@ -24,8 +24,8 @@ function show_graph() {
 
     var force = d3.layout.force()
         .gravity(.05)
-        .distance(100)
-        .charge(-100)
+        .distance(250)
+        .charge(-75)
         .size([width, height]);
 
     d3.json('/graph-query.json', function (json) {
@@ -49,7 +49,7 @@ function show_graph() {
             .call(force.drag);
 
         node.append("circle")
-            .attr("r", "5")
+            .attr("r", "30")
 
         node.append("text")
             .attr("dx", 12)
