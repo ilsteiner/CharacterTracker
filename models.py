@@ -3,10 +3,13 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, Text, ForeignKey
 from app import db
+import os
 
-engine = create_engine('sqlite:///C:\\Users\\isteiner\\Downloads\\CharacterTracker\\database.db', echo=True)
+current_directory = os.path.dirname(__file__)
 
-# engine = create_engine('sqlite:///D:\\Files\\Downloads\\CharacterTracker\\database.db', echo=True)
+filename = os.path.join(current_directory, 'database.db')
+
+engine = create_engine('sqlite:///' + filename)
 
 db_session = scoped_session(sessionmaker(autocommit=False,
                                          autoflush=False,
