@@ -2,7 +2,7 @@
 # Imports
 #----------------------------------------------------------------------------#
 
-from flask import Flask, render_template, request, flash, redirect
+from flask import Flask, render_template, request, flash, redirect,jsonify
 from flask.ext.sqlalchemy import SQLAlchemy
 import logging
 from logging import Formatter
@@ -56,6 +56,11 @@ def home():
     session = db_session()
     characters = session.query(Character).all()
     return render_template('pages/home.html', characters=characters)
+
+
+@app.route('/graph-query')
+def graph_query():
+    return jsonify(**make_graph())
 
 
 @app.route('/populate-data', methods=['POST'])
