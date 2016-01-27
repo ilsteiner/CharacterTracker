@@ -89,6 +89,11 @@ def make_graph():
     for character in characters:
         graph.add_node(character.name)
 
+    # test_list = [
+    #     {'name': 'John', 'description': 'hi there'},
+    #     {'name': 'Sally', 'description': 'hi there'}
+    # ]
+
     return json_graph.node_link_data(graph)
 
 # Create tables.

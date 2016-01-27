@@ -58,9 +58,10 @@ def home():
     return render_template('pages/home.html', characters=characters)
 
 
-@app.route('/graph-query')
+@app.route('/graph-query.json', methods=['GET'])
 def graph_query():
-    return jsonify(**make_graph())
+    graph = make_graph()
+    return jsonify(results=graph)
 
 
 @app.route('/populate-data', methods=['POST'])
