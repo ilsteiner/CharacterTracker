@@ -87,12 +87,21 @@ def make_graph():
     characters = session.query(Character).all()
 
     for character in characters:
-        graph.add_node(character.name)
+        relationships = session.query(Relationship).filter(Relationship.primary == character.id)
 
-    # test_list = [
-    #     {'name': 'John', 'description': 'hi there'},
-    #     {'name': 'Sally', 'description': 'hi there'}
-    # ]
+        relationship_dict = dict()
+
+        for relationship in relationships:
+            related_to_name = session.query(Character).get(relationship.related_to).name
+
+            relationship_dict[related_to_name] = {"relationship_type": relationship.relationship_type,
+                                                          "relationship_description":
+                                                              relationship.relationship_description}
+
+        graph.add_node(character.id, {"name": character.name,
+                                      "description": character.description,
+                                      "short_description": character.short_description,
+                                      "relationships": relationship_dict})
 
     return json_graph.node_link_data(graph)
 

@@ -3,13 +3,14 @@ function show_graph() {
         var items = [];
 
         $.each(data.results.nodes, function (key, val) {
-            items.push("<li>" + key + ": " + val.name + "</li>");
+            items.push("<li>" + key + ": " + val.id + "</li>");
         });
 
         $("<ul/>", {
             "class": "data-items",
             html: items.join("")
         }).appendTo("#graph");
+
     });
 }
 

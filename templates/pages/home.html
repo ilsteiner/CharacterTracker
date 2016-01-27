@@ -9,24 +9,6 @@
             <button class="btn btn-lg">Populate Sample Data</button>
         </form>
     </div>
-    <ul>
-        {% for character in characters %}
-            <li>
-                {{ character.name }}: {{ character.short_description }}
-                {#        <ul>#}
-                {#            {% for relationship in character.get_relationships() %}#}
-                {#                <li>#}
-                {#                    {{ relationship }}#}
-                {#                </li>#}
-                {#                {% else %}#}
-                {#                <li>No relationships</li>#}
-                {#            {% endfor %}#}
-                {#        </ul>#}
-            </li>
-        {% else %}
-            <li>No characters found!</li>
-        {% endfor %}
-    </ul>
 
     <div id="graph">
 
