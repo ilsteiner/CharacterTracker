@@ -12,7 +12,7 @@ from models import *
 from flask_wtf import CsrfProtect
 from sqlalchemy import exc
 import os
-from graph import make_graph
+# from graph import make_graph
 
 #----------------------------------------------------------------------------#
 # App Config.
@@ -53,7 +53,7 @@ def login_required(test):
 def home():
     session = db_session()
     characters = session.query(Character).all()
-    return render_template('pages/home.html', characters=characters, graph=make_graph())
+    return render_template('pages/home.html', characters=characters)
 
 
 @app.route('/populate-data', methods=['POST'])
