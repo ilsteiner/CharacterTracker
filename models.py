@@ -89,19 +89,21 @@ def make_graph():
     for character in characters:
         relationships = session.query(Relationship).filter(Relationship.primary == character.id)
 
-        relationship_dict = dict()
-
-        for relationship in relationships:
-            related_to_name = session.query(Character).get(relationship.related_to).name
-
-            relationship_dict[related_to_name] = {"relationship_type": relationship.relationship_type,
-                                                          "relationship_description":
-                                                              relationship.relationship_description}
+        # relationship_dict = dict()
 
         graph.add_node(character.id, {"name": character.name,
                                       "description": character.description,
-                                      "short_description": character.short_description,
-                                      "relationships": relationship_dict})
+                                      "short_description": character.short_description
+                                      })
+
+        for relationship in relationships:
+            graph.add_edge(relationship.primary, relationship.related_to)
+
+            # related_to_name = session.query(Character).get(relationship.related_to).name
+            #
+            # relationship_dict[related_to_name] = {"relationship_type": relationship.relationship_type,
+            #                                               "relationship_description":
+            #                                                   relationship.relationship_description}
 
     return json_graph.node_link_data(graph)
 
