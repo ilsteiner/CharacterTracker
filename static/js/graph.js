@@ -13,6 +13,7 @@ function show_json() {
     });
 }
 
+//Largely copied from http://bl.ocks.org/jose187/4733747
 function show_graph() {
     var width = 960,
         height = 500;
@@ -86,6 +87,6 @@ function update_graph() {
 }
 
 $(function () {
-
+    show_graph();
     //show_json();
 });

@@ -12,6 +12,7 @@ from models import *
 from flask_wtf import CsrfProtect
 from sqlalchemy import exc
 import os
+from random import sample, randint
 # from graph import make_graph
 
 #----------------------------------------------------------------------------#
@@ -194,6 +195,17 @@ def populate_sample_data():
 
                     session.add(character)
                     session.flush()
+
+        characters = session.query(Character).all()
+
+        for character in characters:
+            related_characters = sample(characters, randint(0, 5))
+
+            for related_character in related_characters:
+                relationship = Relationship(character.id, related_character.id, 'Friend', 'They are just friends')
+                session.add(relationship)
+                session.flush()
+
     except exc.IntegrityError as e:
                 session.rollback()
                 app.logger.info('Could not insert ' + name + ': ' + e.message)
