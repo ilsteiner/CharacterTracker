@@ -176,12 +176,12 @@ if not app.debug:
 
 
 def populate_sample_data():
-    filename = os.path.join(current_directory, 'sample_names.txt')
+    sample_names_file = os.path.join(current_directory, 'sample_names.txt')
 
     session = db_session()
 
     try:
-        with open(filename) as sample_names:
+        with open(sample_names_file) as sample_names:
             just_names = (line.rstrip('\n') for line in sample_names)
             for name in just_names:
                     character = Character(name, "This a short description of " + name,"This is a long description of " + name)

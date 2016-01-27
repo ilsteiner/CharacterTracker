@@ -4,6 +4,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Integer, Text, ForeignKey
 from app import db
 import os
+import networkx as nx
+from networkx.readwrite import json_graph
 
 current_directory = os.path.dirname(__file__)
 
@@ -76,6 +78,18 @@ def character_count():
 def relationship_count():
     return db_session().query(Relationship).count()
 
+
+def make_graph():
+    graph = nx.DiGraph()
+
+    session = db_session()
+
+    characters = session.query(Character).all()
+
+    for character in characters:
+        graph.add_node(character.name)
+
+    return json_graph.node_link_data(graph)
 
 # Create tables.
 Base.metadata.create_all(bind=engine)
