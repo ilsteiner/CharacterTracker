@@ -84,7 +84,9 @@
 </script>
 <script type="text/javascript" src="/static/js/plugins.js" defer></script>
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
-{#<script type="text/javascript" src="/static/js/libs/bootstrap-checkbox.min.js"></script>#}
+<script>if (typeof($.fn.bootstrapToggle) === 'undefined') {
+    document.write('<script src="/static/js/libs/bootstrap-toggle.min.js"><\/script>')
+}</script>
 <script type="text/javascript" src="/static/js/script.js" defer></script>
 
 <!-- Google Analytics - Change UA-XXXXX-X to be your site's ID -->

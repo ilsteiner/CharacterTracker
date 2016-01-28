@@ -13,6 +13,9 @@ $(document).ready(function () {
             limit_: 10							//Maximum Number of Clones
         });
 
+        //Update any triggers on relationship section items
+        update_triggers();
+
         return false;
     });
 });
@@ -41,11 +44,17 @@ $(document).ready(function () {
             /*
              * This is where the name and ID are incremented. I had to rewrite it for my use case.
              * */
-            $(fieldclone).find(':input').each(function () {
-                oldname = $(this).attr("name");
-                oldid = $(this).attr("id");
-                $(this).attr("name", oldname.replace(/-\d-/, '-' + options.newid_ + '-'));
-                $(this).attr("id", oldname.replace(/-\d-/, '-' + options.newid_ + '-'));
+            $(fieldclone).find(':input,div.bidirectional').each(function () {
+                var oldname = $(this).attr("name");
+                var oldid = $(this).attr("id");
+                if(oldname){
+                    console.log('Name: ' + oldname + ' > ' + oldname.replace(/-\d-/, '-' + options.newid_ + '-'));
+                    $(this).attr("name", oldname.replace(/-\d/, '-' + options.newid_));
+                }
+                if(oldid){
+                    console.log('ID: ' + oldid + ' > ' + oldid.replace(/-\d-/, '-' + options.newid_ + '-'));
+                    $(this).attr("id", oldid.replace(/-\d/, '-' + options.newid_));
+                }
             });
 
             //Fix the legend for the fieldset
@@ -55,7 +64,7 @@ $(document).ready(function () {
             $(fieldclone).find('a').attr('href','#collapse-'+options.newid_);
 
             //Fix the collapse div
-            $(fieldclone).find('.collapse').attr('id','collapse-'+options.newid_);
+            $(fieldclone).find('.relationship-section.collapse').attr('id','collapse-'+options.newid_);
 
             //==> Locate Target Id <==//
             var targetid = $(settings.target_).attr("id");
