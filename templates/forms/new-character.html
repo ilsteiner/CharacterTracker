@@ -45,18 +45,23 @@
         {% if character_count %}
             <div class="col-md-12">
                 <fieldset>
-                    <legend>
-                        Relationships
-                        <button type="button" class="btn btn-default" id="insert-new">
-                            <span class="glyphicon glyphicon-align-right hidden"></span>
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Relationship
-                        </button>
-                    </legend>
+                    <div class="row" id="relationship-header">
+                        <div class="col-md-2">
+                            <legend>Relationships</legend>
+                        </div>
+
+                        <div class="col-md-10">
+                            <button type="button" class="btn btn-default" id="insert-new">
+                                <span class="glyphicon glyphicon-align-right hidden"></span>
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Relationship
+                            </button>
+                        </div>
+                    </div>
 
                     {% for relationship in form.relationships %}
                         <fieldset class="relationship">
                             <a href="#collapse-{{ loop.index0 }}" data-toggle="collapse">
-                                <legend class="sub-legend">
+                                <legend class="sub-legend" id="sublegend-{{ loop.index0 }}">
                                     New Relationship
                                 </legend>
                             </a>
@@ -90,8 +95,8 @@
 
                                 <div class="row bidirectional collapse" id="bidirectional-{{ loop.index0 }}">
                                     <div class="col-md-12">
-                                        <fieldset>
-                                            <legend>
+                                        <fieldset class="bidirectional">
+                                            <legend class="bidirectional" id="bidirectional-legend-{{ loop.index0 }}">
                                                 Bidirectional Relationship
                                             </legend>
                                         </fieldset>
