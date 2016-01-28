@@ -8,6 +8,8 @@ $( document ).ready(function() {
 });
 
 function update_triggers() {
+    console.log('Updating triggers');
+
     //Toggle visibility of the bidirectional form
     $('input.bidirectional').change(function () {
         var the_id = $(this).attr('id').match(/\d+/)[0];
