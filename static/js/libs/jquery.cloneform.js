@@ -92,6 +92,17 @@ $(document).ready(function () {
 
             //Call Bootstrap Toggle on the inserted checkbox
             $('#relationships-' + options.newid_ + '-bidirectional').bootstrapToggle();
+
+            //Hide other relationships
+            $('.relationship-section.collapse').each(function () {
+               if($(this).attr('id') === ('collapse-' + options.newid_)){
+                   $(this).collapse('show');
+               }
+
+                else{
+                   $(this).collapse('hide');
+               }
+            });
         }
     };
 
