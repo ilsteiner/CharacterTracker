@@ -4,19 +4,9 @@ $( document ).ready(function() {
         $(this).closest('fieldset').find('legend').html('Relationship with ' + $(this).children('option:selected').text())
     });
 
-    //When switching to a bidirectional relationship, show the rest of the form
-    $('input.bidirectional').checkboxpicker().change(function() {
-        console.log("HI!");
-        if($(this).prop('checked') === true){
-            $(this).parent().parent().child()
-            $(this).closest('div.bidirectional').removeClass('hidden');
-        }
-        else if($(this).prop('checked') === false){
-            $(this).closest('div.bidirectional').removeClass('hidden');
-        }
-
+    //Toggle visibility of the bidirectional form
+    $('input.bidirectional').change(function () {
+        var the_id = $(this).attr('id').match(/\d+/)[0];
+        $('#bidirectional-' + the_id).collapse('toggle');
     });
-
-    //Activate checkbox JS
-    $(':checkbox').checkboxpicker();
 });

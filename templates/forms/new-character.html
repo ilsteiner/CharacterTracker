@@ -42,7 +42,7 @@
             </fieldset>
         </div>
 
-    {% if character_count %}
+        {% if character_count %}
             <div class="col-md-12">
                 <fieldset>
                     <legend>
@@ -72,8 +72,12 @@
                                     </div>
 
                                     <div class="col-md-2">
-                                        <label for="relationship_bidirectional">{{ relationship.bidirectional.label.text }}</label>
-                                        {{ relationship.bidirectional(class = 'form-control bidirectional', **{'data-style':'btn-group-justified'}) }}
+                                        <label for="relationship_bidirectional">Relationship Is</label>
+                                        {{ relationship.bidirectional(class = 'form-control bidirectional',**{'data-toggle':'toggle',
+                                                                        'data-off':'Secret',
+                                                                        'data-on':'Shared',
+                                                                        'data-onstyle':'success',
+                                                                        'data-offstyle':'danger'}) }}
                                     </div>
                                 </div>
 
@@ -84,7 +88,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row bidirectional hidden">
+                                <div class="row bidirectional collapse" id="bidirectional-{{ loop.index0 }}">
                                     <div class="col-md-12">
                                         <fieldset>
                                             <legend>
