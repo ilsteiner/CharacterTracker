@@ -32,7 +32,7 @@ function show_graph() {
 
     var force = d3.layout.force()
         .gravity(.05)
-        .distance(150)
+        .distance(200)
         .charge(-2000)
         .size([width, height]);
 
@@ -73,13 +73,8 @@ function show_graph() {
             });
 
         force.on("tick", function () {
-            /*node.attr("dx", function (d) {
-                return d.x = Math.max(radius, Math.min(width - radius, d.x));
-            }).attr("dy", function (d) {
-               return d.y = Math.max(radius, Math.min(height - radius, d.y));
-            });
-*/
 
+            //Source: http://bl.ocks.org/mbostock/1129492
             node.attr("transform", function (d) {
                 var dx = Math.max(radius, Math.min(width - radius, d.x));
                 var dy = Math.max(radius, Math.min(height - radius, d.y));
@@ -99,6 +94,7 @@ function show_graph() {
                     return d.target.y;
                 });
 
+            //No bounding box implementation
             /*node.attr("transform", function (d) {
                 return "translate(" + d.x + "," + d.y + ")";
             });*/
