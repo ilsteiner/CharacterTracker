@@ -64,6 +64,16 @@ class NewCharacterForm(Form):
 
     relationships = FieldList(FormField(RelationshipForm), validators=[Optional()], min_entries=1)
 
+
+class SearchCharacterForm(Form):
+    name = StringField(
+        'Character Name'
+    )
+
+    description_snippet = StringField(
+        'Description'
+    )
+
 # class NewRelationshipTypeForm(Form):
 #     description = StringField(
 #         'Relationship Type', validators=[DataRequired(), Length(min=1, max=120)]

@@ -2,12 +2,40 @@
 {% block title %}Home{% endblock %}
 {% block content %}
 
-    <div class="page-header">
-        <h1>Characters</h1>
-        <form action="/populate-data" method="post">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-            <button class="btn btn-lg">Populate Sample Data</button>
-        </form>
+    <div class="page-header row">
+        <div class="col-md-4">
+            <form method="post" id="search-characters">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form.name(class_ = 'form-control', placeholder = 'Search name') }}
+                    </div>
+
+                    <div class="col-md-6">
+                        {{ form.description_snippet(class_ = 'form-control', placeholder = 'Search description') }}
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-3">
+            <ul id="name-list-1">
+
+            </ul>
+        </div>
+
+        <div class="col-md-3">
+            <ul id="name-list-2">
+
+            </ul>
+        </div>
+
+        <div class="col-md-2">
+            <form action="/populate-data" method="post">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                <button class="btn btn-lg">Populate Sample Data</button>
+            </form>
+        </div>
     </div>
 
     <div class="row">

@@ -10,7 +10,7 @@ from logging.handlers import RotatingFileHandler
 from forms import *
 from models import *
 from flask_wtf import CsrfProtect
-from sqlalchemy import exc
+from sqlalchemy import exc, or_
 import os
 from random import sample, randint
 # from graph import make_graph
@@ -56,7 +56,8 @@ def login_required(test):
 def home():
     session = db_session()
     characters = session.query(Character).all()
-    return render_template('pages/home.html', characters=characters)
+    form = SearchCharacterForm(request.form)
+    return render_template('pages/home.html', characters=characters, form=form)
 
 
 @app.route('/graph-query.json', methods=['GET'])
@@ -69,6 +70,31 @@ def graph_query():
 def populate_data():
     populate_sample_data()
     return redirect('/', code=302)
+
+
+@csrf.exempt
+@app.route('/search-characters', methods=['POST'])
+def search_characters():
+    session = db_session()
+
+    data = request.get_json()
+
+    name = data.get("name")
+
+    description_snippet = data.get("description_snippet")
+
+    results = session.query(Character).filter(Character.name.contains(name),
+                                                 or_(
+                                                        Character.short_description.contains(description_snippet),
+                                                        Character.description.contains(description_snippet)
+                                                 )).all()
+
+    characters = []
+
+    for character in results:
+        characters.append({'name': character.name, 'short_description': character.short_description})
+
+    return jsonify(characters=characters)
 
 
 @app.route('/new-character', methods=['GET', 'POST'])
