@@ -79,12 +79,17 @@ def relationship_count():
     return db_session().query(Relationship).count()
 
 
-def make_graph():
+def make_graph(names):
     graph = nx.DiGraph()
 
     session = db_session()
 
-    characters = session.query(Character).all()
+    characters = []
+
+    if len(names) > 0:
+        characters = session.query(Character).filter(Character.name.in_(names))
+    else:
+        characters = session.query(Character).all()
 
     for character in characters:
         relationships = session.query(Relationship).filter(Relationship.primary == character.id)

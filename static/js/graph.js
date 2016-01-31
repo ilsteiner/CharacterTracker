@@ -14,7 +14,17 @@ function show_json() {
 }
 
 //Largely copied from http://bl.ocks.org/jose187/4733747
-function show_graph() {
+function show_graph(filter) {
+    var url_string = '/graph-query.json';
+
+    console.log(filter);
+
+    if(typeof filter != "undefined"){
+        $.each(filter, function (index, name) {
+            url_string += '?name=' + name;
+        });
+    }
+
     var width = 960,
         height = 500,
         radius = 40;
@@ -62,13 +72,13 @@ function show_graph() {
         node.append("text")
             .each(function (d) {
                 var name_array = d.name.split(" ");
-                for (i=0; i < name_array.length; i++){
+                for (i = 0; i < name_array.length; i++) {
                     d3.select(this).append("tspan")
                         .text(name_array[i])
                         .attr("text-anchor", "middle")
                         .attr("dy", i ? "1.2em" : 0)
                         .attr("x", 0)
-                        .attr("class", "tspan-"+i);
+                        .attr("class", "tspan-" + i);
                 }
             });
 
@@ -96,17 +106,15 @@ function show_graph() {
 
             //No bounding box implementation
             /*node.attr("transform", function (d) {
-                return "translate(" + d.x + "," + d.y + ")";
-            });*/
+             return "translate(" + d.x + "," + d.y + ")";
+             });*/
         })
     });
 }
 
-function update_graph() {
-    d3.json('/graph-query.json', function (data) {
-        d3.select("#graph_contianer")
-            .append()
-    });
+function update_graph(filter) {
+    $('svg').remove();
+    show_graph(filter);
 }
 
 function get_width() {
@@ -123,7 +131,7 @@ function get_height() {
     return Math.round(get_width() / aspect);
 }
 
-function size_graph(){
+function size_graph() {
     var graph = $('#graph');
 
     graph.attr("width", get_width());
@@ -133,8 +141,6 @@ function size_graph(){
 
 $(function () {
     show_graph();
-
-    size_graph();
 
     $(window).on("resize", size_graph());
 });
