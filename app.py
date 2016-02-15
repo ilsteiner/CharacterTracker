@@ -63,7 +63,10 @@ def home():
 
 @app.route('/graph-query.json', methods=['GET'])
 def graph_query():
-    graph = make_graph()
+    names = request.args.get('name')
+    if names is None:
+        names = []
+    graph = make_graph(names)
     return jsonify(results=graph)
 
 

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<component name="dataSourceStorage">
-  <data-source name="Sqlite (Xerial) - database.db" uuid="7b402a13-fc67-4bc3-9cff-bc007f6f011d">
-    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
-  </data-source>
-  <data-source name="Sqlite (Xerial) - database.db [2]" uuid="f21b0f56-f72c-4196-8afa-afe37c80629e">
-    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
-  </data-source>
-</component>

@@ -62,6 +62,7 @@ function update_list(names) {
                 }
             }
         });
-
     });
+
+    update_graph(names)
 }
