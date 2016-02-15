@@ -2,7 +2,7 @@
 # Imports
 #----------------------------------------------------------------------------#
 
-from flask import Flask, render_template, request, flash, redirect,jsonify
+from flask import Flask, render_template, request, flash, redirect, jsonify, url_for
 from flask.ext.sqlalchemy import SQLAlchemy
 import logging
 from logging import Formatter
@@ -13,6 +13,7 @@ from flask_wtf import CsrfProtect
 from sqlalchemy import exc, or_
 import os
 from random import sample, randint
+from urllib import quote_plus, unquote_plus
 # from graph import make_graph
 
 #----------------------------------------------------------------------------#
@@ -97,9 +98,27 @@ def search_characters():
     return jsonify(characters=characters)
 
 
+@app.route('/characters/<character_name>', methods=['GET'])
+def view_character_name(character_name):
+    character_name = unquote_plus(character_name)
+    session = db_session()
+    print(character_name)
+    character = session.query(Character).filter(Character.name.is_(character_name)).all()[0]
+    return redirect('/characters/' + str(character.id))
+
+
+@app.route('/characters/<character_id>', methods=['GET', 'POST'])
+def view_character_id(character_id):
+    session = db_session()
+    character = session.query(Character).get(character_id)
+    form = CharacterForm(request.form)
+    form.character = character
+    return render_template('forms/character.html',form=form)
+
+
 @app.route('/new-character', methods=['GET', 'POST'])
 def new_character():
-    form = NewCharacterForm(request.form)
+    form = CharacterForm(request.form)
 
     for relationship in form.relationships:
         relationship.related_to.query = Character.query
@@ -141,7 +160,7 @@ def new_character():
             for err in errorMessages:
                 flash(err)
 
-    return render_template('forms/new-character.html', form=form, character_count=character_count())
+    return render_template('forms/character.html', form=form, character_count=character_count())
 
 # @app.route('/new-relationship-type', methods=['GET', 'POST'])
 # def new_relationship_type():

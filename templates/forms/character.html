@@ -1,5 +1,7 @@
 {% extends 'layouts/form.html' %}
-{% block title %}New Character{% endblock %}
+{% block title %}
+    {{ form.character.name if form.character.name != None else 'New Character' }}
+{% endblock %}
 {% block content %}
 
     <form method="post" class="form">

@@ -49,7 +49,9 @@ class RelationshipForm(Form):
     )
 
 
-class NewCharacterForm(Form):
+class CharacterForm(Form):
+    character = None
+
     name = StringField(
         'Character Name', validators=[DataRequired(), Length(min=1, max=120)]
     )
