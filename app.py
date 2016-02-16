@@ -262,6 +262,10 @@ def populate_sample_data():
 # Launch.
 #----------------------------------------------------------------------------#
 
-# Bind to PORT if defined, otherwise default to 5000.
+# Or specify port manually:
+if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    if port == 5000:
+        app.run()
+    else:
+        app.run(host='0.0.0.0', port=port)
