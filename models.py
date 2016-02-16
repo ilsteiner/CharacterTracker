@@ -46,16 +46,6 @@ class Character(Base):
         return relationships
 
 
-# class RelationshipType(Base):
-#     __tablename__ = 'RelationshipType'
-#
-#     id = db.Column(db.Integer, primary_key=True)
-#     description = db.Column(db.String(120), unique=True)
-#
-#     def __init__(self, description):
-#         self.description = description
-
-
 class Relationship(Base):
     __tablename__ = 'Relationship'
 
