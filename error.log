@@ -17,3 +17,87 @@
 2016-02-16 10:52:21,660 INFO: errors [in C:/Users/isteiner/Downloads/CharacterTracker/app.py:230]
 2016-02-16 10:56:06,772 INFO: errors [in C:\Users\isteiner\Downloads\CharacterTracker\app.py:230]
 2016-02-16 10:56:07,022 INFO: errors [in C:/Users/isteiner/Downloads/CharacterTracker/app.py:230]
+2016-02-16 11:05:42,342 INFO: errors [in C:\Users\isteiner\Downloads\CharacterTracker\app.py:236]
+2016-02-16 11:05:42,592 INFO: errors [in C:/Users/isteiner/Downloads/CharacterTracker/app.py:236]
+2016-02-16 11:06:02,842 ERROR: Exception on /search-characters [POST] [in C:\Users\isteiner\CharacterTracker\lib\site-packages\flask\app.py:1423]
+Traceback (most recent call last):
+  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\flask\app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\flask\app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\flask\app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\flask\app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\flask\app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:/Users/isteiner/Downloads/CharacterTracker/app.py", line 92, in search_characters
+    Character.short_description.contains(description_snippet),
+  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\operators.py", line 523, in contains
+    return self.operate(contains_op, other, **kwargs)
+  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\orm\attributes.py", line 175, in operate
+    return op(self.comparator, *other, **kwargs)
+  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\operators.py", line 772, in contains_op
+    return a.contains(b, escape=escape)
+  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\operators.py", line 523, in contains
+    return self.operate(contains_op, other, **kwargs)
+  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\orm\properties.py", line 269, in operate
+    return op(self.__clause_element__(), *other, **kwargs)
+  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\operators.py", line 772, in contains_op
+    return a.contains(b, escape=escape)
+  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\operators.py", line 523, in contains
+    return self.operate(contains_op, other, **kwargs)
+  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\elements.py", line 739, in operate
+    return op(self.comparator, *other, **kwargs)
+  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\operators.py", line 772, in contains_op
+    return a.contains(b, escape=escape)
+  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\operators.py", line 523, in contains
+    return self.operate(contains_op, other, **kwargs)
+  File "<string>", line 1, in <lambda>
+  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\type_api.py", line 60, in operate
+    return o[0](self.expr, op, *(other + o[1:]), **kwargs)
+  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\default_comparator.py", line 53, in _boolean_compare
+    "Only '=', '!=', 'is_()', 'isnot()' operators can "
+ArgumentError: Only '=', '!=', 'is_()', 'isnot()' operators can be used with None/True/False
+2016-02-16 11:06:03,789 ERROR: Exception on /search-characters [POST] [in C:\Users\isteiner\CharacterTracker\lib\site-packages\flask\app.py:1423]
+Traceback (most recent call last):
+  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\flask\app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\flask\app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\flask\app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\flask\app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\flask\app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "C:/Users/isteiner/Downloads/CharacterTracker/app.py", line 92, in search_characters
+    Character.short_description.contains(description_snippet),
+  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\operators.py", line 523, in contains
+    return self.operate(contains_op, other, **kwargs)
+  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\orm\attributes.py", line 175, in operate
+    return op(self.comparator, *other, **kwargs)
+  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\operators.py", line 772, in contains_op
+    return a.contains(b, escape=escape)
+  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\operators.py", line 523, in contains
+    return self.operate(contains_op, other, **kwargs)
+  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\orm\properties.py", line 269, in operate
+    return op(self.__clause_element__(), *other, **kwargs)
+  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\operators.py", line 772, in contains_op
+    return a.contains(b, escape=escape)
+  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\operators.py", line 523, in contains
+    return self.operate(contains_op, other, **kwargs)
+  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\elements.py", line 739, in operate
+    return op(self.comparator, *other, **kwargs)
+  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\operators.py", line 772, in contains_op
+    return a.contains(b, escape=escape)
+  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\operators.py", line 523, in contains
+    return self.operate(contains_op, other, **kwargs)
+  File "<string>", line 1, in <lambda>
+  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\type_api.py", line 60, in operate
+    return o[0](self.expr, op, *(other + o[1:]), **kwargs)
+  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\default_comparator.py", line 53, in _boolean_compare
+    "Only '=', '!=', 'is_()', 'isnot()' operators can "
+ArgumentError: Only '=', '!=', 'is_()', 'isnot()' operators can be used with None/True/False
+2016-02-16 11:06:38,770 INFO: errors [in C:\Users\isteiner\Downloads\CharacterTracker\app.py:236]
+2016-02-16 11:06:39,026 INFO: errors [in C:/Users/isteiner/Downloads/CharacterTracker/app.py:236]

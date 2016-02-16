@@ -95,6 +95,8 @@ def search_characters():
 
     characters = []
 
+    session.close()
+
     for character in results:
         characters.append({'name': character.name, 'short_description': character.short_description})
 
@@ -107,6 +109,7 @@ def view_character_name(character_name):
     session = db_session()
     print(character_name)
     character = session.query(Character).filter(Character.name.is_(character_name)).all()[0]
+    session.close()
     return redirect('/characters/' + str(character.id))
 
 
@@ -116,6 +119,7 @@ def view_character_id(character_id):
     character = session.query(Character).get(character_id)
     form = CharacterForm(request.form)
     form.character = character
+    session.close()
     return render_template('forms/character.html',form=form)
 
 
@@ -133,7 +137,7 @@ def new_character():
 
         try:
             session.add(character)
-            session.flush()
+            session.commit()
             session.refresh(character)
             flash(character.name + ' created')
 
@@ -147,13 +151,15 @@ def new_character():
                                                         relationship.relationship_type.data,
                                                         relationship.relationship_description.data)
                         session.add(new_relationship)
-                        session.flush()
+                        session.commit()
                         new_relationships += 1
 
                 if new_relationships == 1:
                     flash('Created ' + str(new_relationships) + ' new character relationship')
                 elif new_relationships >0:
                     flash('Created ' + str(new_relationships) + ' new character relationships')
+
+            session.close()
         except (exc.IntegrityError, exc.InvalidRequestError) as e:
             session.rollback()
             flash(e.message)
@@ -242,7 +248,7 @@ def populate_sample_data():
                     character = Character(name, "This a short description of " + name,"This is a long description of " + name)
 
                     session.add(character)
-                    session.flush()
+                    session.commit()
 
         characters = session.query(Character).all()
 
@@ -252,7 +258,9 @@ def populate_sample_data():
             for related_character in related_characters:
                 relationship = Relationship(character.id, related_character.id, 'Friend', 'They are just friends')
                 session.add(relationship)
-                session.flush()
+                session.commit()
+
+        session.close()
 
     except exc.IntegrityError as e:
                 session.rollback()
