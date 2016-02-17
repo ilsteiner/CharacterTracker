@@ -16,7 +16,12 @@
 }
 
 .node circle {
+    cursor: move;
     stroke: #fff;
     stroke-width: 3px;
     fill: #555;
+}
+
+.node .fixed {
+  fill: #2074ff;
 }

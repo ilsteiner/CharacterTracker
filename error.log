@@ -1,103 +1,44 @@
-
-2016-01-22 13:24:34,545 INFO: errors [in C:\Users\isteiner\Downloads\CharacterTracker\app.py:160]
-2016-01-22 13:24:34,571 INFO: errors [in C:/Users/isteiner/Downloads/CharacterTracker/app.py:160]
-2016-01-22 13:25:34,683 INFO: errors [in C:\Users\isteiner\Downloads\CharacterTracker\app.py:160]
-2016-01-22 13:25:34,710 INFO: errors [in C:/Users/isteiner/Downloads/CharacterTracker/app.py:160]
-2016-02-15 15:42:51,832 INFO: errors [in C:\Users\isteiner\Downloads\CharacterTracker\app.py:230]
-2016-02-15 15:42:54,523 INFO: errors [in C:/Users/isteiner/Downloads/CharacterTracker/app.py:230]
-2016-02-15 15:43:33,352 INFO: errors [in C:\Users\isteiner\Downloads\CharacterTracker\app.py:230]
-2016-02-15 15:43:33,690 INFO: errors [in C:/Users/isteiner/Downloads/CharacterTracker/app.py:230]
-2016-02-15 15:49:54,799 INFO: errors [in C:\Users\isteiner\Downloads\CharacterTracker\app.py:230]
-2016-02-15 15:49:55,059 INFO: errors [in C:/Users/isteiner/Downloads/CharacterTracker/app.py:230]
-2016-02-16 10:50:02,907 INFO: errors [in C:\Users\isteiner\Downloads\CharacterTracker\app.py:230]
-2016-02-16 10:50:07,586 INFO: errors [in C:/Users/isteiner/Downloads/CharacterTracker/app.py:230]
-2016-02-16 10:50:51,437 INFO: errors [in C:\Users\isteiner\Downloads\CharacterTracker\app.py:230]
-2016-02-16 10:50:51,694 INFO: errors [in C:/Users/isteiner/Downloads/CharacterTracker/app.py:230]
-2016-02-16 10:52:21,395 INFO: errors [in C:\Users\isteiner\Downloads\CharacterTracker\app.py:230]
-2016-02-16 10:52:21,660 INFO: errors [in C:/Users/isteiner/Downloads/CharacterTracker/app.py:230]
-2016-02-16 10:56:06,772 INFO: errors [in C:\Users\isteiner\Downloads\CharacterTracker\app.py:230]
-2016-02-16 10:56:07,022 INFO: errors [in C:/Users/isteiner/Downloads/CharacterTracker/app.py:230]
-2016-02-16 11:05:42,342 INFO: errors [in C:\Users\isteiner\Downloads\CharacterTracker\app.py:236]
-2016-02-16 11:05:42,592 INFO: errors [in C:/Users/isteiner/Downloads/CharacterTracker/app.py:236]
-2016-02-16 11:06:02,842 ERROR: Exception on /search-characters [POST] [in C:\Users\isteiner\CharacterTracker\lib\site-packages\flask\app.py:1423]
-Traceback (most recent call last):
-  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\flask\app.py", line 1817, in wsgi_app
-    response = self.full_dispatch_request()
-  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\flask\app.py", line 1477, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\flask\app.py", line 1381, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\flask\app.py", line 1475, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\flask\app.py", line 1461, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "C:/Users/isteiner/Downloads/CharacterTracker/app.py", line 92, in search_characters
-    Character.short_description.contains(description_snippet),
-  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\operators.py", line 523, in contains
-    return self.operate(contains_op, other, **kwargs)
-  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\orm\attributes.py", line 175, in operate
-    return op(self.comparator, *other, **kwargs)
-  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\operators.py", line 772, in contains_op
-    return a.contains(b, escape=escape)
-  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\operators.py", line 523, in contains
-    return self.operate(contains_op, other, **kwargs)
-  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\orm\properties.py", line 269, in operate
-    return op(self.__clause_element__(), *other, **kwargs)
-  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\operators.py", line 772, in contains_op
-    return a.contains(b, escape=escape)
-  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\operators.py", line 523, in contains
-    return self.operate(contains_op, other, **kwargs)
-  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\elements.py", line 739, in operate
-    return op(self.comparator, *other, **kwargs)
-  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\operators.py", line 772, in contains_op
-    return a.contains(b, escape=escape)
-  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\operators.py", line 523, in contains
-    return self.operate(contains_op, other, **kwargs)
-  File "<string>", line 1, in <lambda>
-  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\type_api.py", line 60, in operate
-    return o[0](self.expr, op, *(other + o[1:]), **kwargs)
-  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\default_comparator.py", line 53, in _boolean_compare
-    "Only '=', '!=', 'is_()', 'isnot()' operators can "
-ArgumentError: Only '=', '!=', 'is_()', 'isnot()' operators can be used with None/True/False
-2016-02-16 11:06:03,789 ERROR: Exception on /search-characters [POST] [in C:\Users\isteiner\CharacterTracker\lib\site-packages\flask\app.py:1423]
-Traceback (most recent call last):
-  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\flask\app.py", line 1817, in wsgi_app
-    response = self.full_dispatch_request()
-  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\flask\app.py", line 1477, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\flask\app.py", line 1381, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\flask\app.py", line 1475, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\flask\app.py", line 1461, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "C:/Users/isteiner/Downloads/CharacterTracker/app.py", line 92, in search_characters
-    Character.short_description.contains(description_snippet),
-  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\operators.py", line 523, in contains
-    return self.operate(contains_op, other, **kwargs)
-  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\orm\attributes.py", line 175, in operate
-    return op(self.comparator, *other, **kwargs)
-  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\operators.py", line 772, in contains_op
-    return a.contains(b, escape=escape)
-  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\operators.py", line 523, in contains
-    return self.operate(contains_op, other, **kwargs)
-  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\orm\properties.py", line 269, in operate
-    return op(self.__clause_element__(), *other, **kwargs)
-  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\operators.py", line 772, in contains_op
-    return a.contains(b, escape=escape)
-  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\operators.py", line 523, in contains
-    return self.operate(contains_op, other, **kwargs)
-  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\elements.py", line 739, in operate
-    return op(self.comparator, *other, **kwargs)
-  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\operators.py", line 772, in contains_op
-    return a.contains(b, escape=escape)
-  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\operators.py", line 523, in contains
-    return self.operate(contains_op, other, **kwargs)
-  File "<string>", line 1, in <lambda>
-  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\type_api.py", line 60, in operate
-    return o[0](self.expr, op, *(other + o[1:]), **kwargs)
-  File "C:\Users\isteiner\CharacterTracker\lib\site-packages\sqlalchemy\sql\default_comparator.py", line 53, in _boolean_compare
-    "Only '=', '!=', 'is_()', 'isnot()' operators can "
-ArgumentError: Only '=', '!=', 'is_()', 'isnot()' operators can be used with None/True/False
-2016-02-16 11:06:38,770 INFO: errors [in C:\Users\isteiner\Downloads\CharacterTracker\app.py:236]
-2016-02-16 11:06:39,026 INFO: errors [in C:/Users/isteiner/Downloads/CharacterTracker/app.py:236]
+2016-02-17 11:33:19,124 INFO: errors [in C:\Users\isteiner\Downloads\CharacterTracker\app.py:236]
+2016-02-17 11:33:19,846 INFO: errors [in C:/Users/isteiner/Downloads/CharacterTracker/app.py:236]
+2016-02-17 11:36:58,309 INFO: errors [in C:\Users\isteiner\Downloads\CharacterTracker\app.py:236]
+2016-02-17 11:36:58,628 INFO: errors [in C:/Users/isteiner/Downloads/CharacterTracker/app.py:236]
+2016-02-17 11:39:08,105 INFO: errors [in C:\Users\isteiner\Downloads\CharacterTracker\app.py:236]
+2016-02-17 11:39:08,540 INFO: errors [in C:/Users/isteiner/Downloads/CharacterTracker/app.py:236]
+2016-02-17 11:40:11,437 INFO: errors [in C:\Users\isteiner\Downloads\CharacterTracker\app.py:236]
+2016-02-17 11:40:12,177 INFO: errors [in C:/Users/isteiner/Downloads/CharacterTracker/app.py:236]
+2016-02-17 11:47:01,440 INFO: errors [in C:\Users\isteiner\Downloads\CharacterTracker\app.py:236]
+2016-02-17 11:47:02,072 INFO: errors [in C:/Users/isteiner/Downloads/CharacterTracker/app.py:236]
+2016-02-17 11:48:09,905 INFO: errors [in C:\Users\isteiner\Downloads\CharacterTracker\app.py:236]
+2016-02-17 11:48:10,443 INFO: errors [in C:/Users/isteiner/Downloads/CharacterTracker/app.py:236]
+2016-02-17 11:49:11,174 INFO: errors [in C:\Users\isteiner\Downloads\CharacterTracker\app.py:236]
+2016-02-17 11:49:11,624 INFO: errors [in C:/Users/isteiner/Downloads/CharacterTracker/app.py:236]
+2016-02-17 11:49:35,091 INFO: errors [in C:\Users\isteiner\Downloads\CharacterTracker\app.py:236]
+2016-02-17 11:49:35,644 INFO: errors [in C:/Users/isteiner/Downloads/CharacterTracker/app.py:236]
+2016-02-17 11:50:29,696 INFO: errors [in C:\Users\isteiner\Downloads\CharacterTracker\app.py:236]
+2016-02-17 11:50:30,411 INFO: errors [in C:/Users/isteiner/Downloads/CharacterTracker/app.py:236]
+2016-02-17 11:51:23,598 INFO: errors [in C:\Users\isteiner\Downloads\CharacterTracker\app.py:236]
+2016-02-17 11:51:23,993 INFO: errors [in C:/Users/isteiner/Downloads/CharacterTracker/app.py:236]
+2016-02-17 11:53:15,687 INFO: errors [in C:\Users\isteiner\Downloads\CharacterTracker\app.py:236]
+2016-02-17 11:53:16,180 INFO: errors [in C:/Users/isteiner/Downloads/CharacterTracker/app.py:236]
+2016-02-17 11:54:09,671 INFO: errors [in C:\Users\isteiner\Downloads\CharacterTracker\app.py:236]
+2016-02-17 11:54:10,312 INFO: errors [in C:/Users/isteiner/Downloads/CharacterTracker/app.py:236]
+2016-02-17 11:55:09,219 INFO: errors [in C:\Users\isteiner\Downloads\CharacterTracker\app.py:236]
+2016-02-17 11:55:09,894 INFO: errors [in C:/Users/isteiner/Downloads/CharacterTracker/app.py:236]
+2016-02-17 11:56:00,533 INFO: errors [in C:\Users\isteiner\Downloads\CharacterTracker\app.py:236]
+2016-02-17 11:56:01,499 INFO: errors [in C:/Users/isteiner/Downloads/CharacterTracker/app.py:236]
+2016-02-17 11:57:08,112 INFO: errors [in C:\Users\isteiner\Downloads\CharacterTracker\app.py:236]
+2016-02-17 11:57:08,743 INFO: errors [in C:/Users/isteiner/Downloads/CharacterTracker/app.py:236]
+2016-02-17 12:01:21,642 INFO: errors [in C:\Users\isteiner\Downloads\CharacterTracker\app.py:236]
+2016-02-17 12:01:22,203 INFO: errors [in C:/Users/isteiner/Downloads/CharacterTracker/app.py:236]
+2016-02-17 12:03:46,770 INFO: errors [in C:\Users\isteiner\Downloads\CharacterTracker\app.py:236]
+2016-02-17 12:03:47,372 INFO: errors [in C:/Users/isteiner/Downloads/CharacterTracker/app.py:236]
+2016-02-17 12:04:43,835 INFO: errors [in C:\Users\isteiner\Downloads\CharacterTracker\app.py:236]
+2016-02-17 12:04:44,576 INFO: errors [in C:/Users/isteiner/Downloads/CharacterTracker/app.py:236]
+2016-02-17 12:05:58,276 INFO: errors [in C:\Users\isteiner\Downloads\CharacterTracker\app.py:236]
+2016-02-17 12:05:58,819 INFO: errors [in C:/Users/isteiner/Downloads/CharacterTracker/app.py:236]
+2016-02-17 12:06:26,614 INFO: errors [in C:\Users\isteiner\Downloads\CharacterTracker\app.py:236]
+2016-02-17 12:06:27,104 INFO: errors [in C:/Users/isteiner/Downloads/CharacterTracker/app.py:236]
+2016-02-17 12:08:37,094 INFO: errors [in C:\Users\isteiner\Downloads\CharacterTracker\app.py:236]
+2016-02-17 12:08:37,341 INFO: errors [in C:/Users/isteiner/Downloads/CharacterTracker/app.py:236]
+2016-02-17 12:08:43,721 INFO: errors [in C:\Users\isteiner\Downloads\CharacterTracker\app.py:236]
+2016-02-17 12:08:44,267 INFO: errors [in C:/Users/isteiner/Downloads/CharacterTracker/app.py:236]

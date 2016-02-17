@@ -13,105 +13,6 @@ function show_json() {
     });
 }
 
-//Largely copied from http://bl.ocks.org/jose187/4733747
-function show_graph(filter) {
-    var url_string = '/graph-query.json';
-
-    console.log(filter);
-
-    if(typeof filter != "undefined"){
-        $.each(filter, function (index, name) {
-            url_string += '?name=' + name;
-        });
-    }
-
-    var width = 960,
-        height = 500,
-        radius = 40;
-
-    var svg = d3.select("#graph_container").append("svg")
-        .attr("width", width)
-        .attr("height", height)
-        .attr("id", "graph");
-
-    size_graph();
-
-    width = get_width();
-
-    height = get_height();
-
-    var force = d3.layout.force()
-        .gravity(.05)
-        .distance(200)
-        .charge(-2000)
-        .size([width, height]);
-
-    d3.json('/graph-query.json', function (json) {
-        force
-            .nodes(json.results.nodes)
-            .links(json.results.links)
-            .start();
-
-        var link = svg.selectAll(".link")
-            .data(json.results.links)
-            .enter().append("line")
-            .attr("class", "link")
-            .style("stroke-width", function (d) {
-                return Math.sqrt(d.weight);
-            });
-
-        var node = svg.selectAll(".node")
-            .data(json.results.nodes)
-            .enter().append("g")
-            .attr("class", "node")
-            .call(force.drag);
-
-        node.append("circle")
-            .attr("r", radius);
-
-        node.append("text")
-            .each(function (d) {
-                var name_array = d.name.split(" ");
-                for (i = 0; i < name_array.length; i++) {
-                    d3.select(this).append("tspan")
-                        .text(name_array[i])
-                        .attr("text-anchor", "middle")
-                        .attr("dy", i ? "1.2em" : 0)
-                        .attr("x", 0)
-                        .attr("class", "tspan-" + i);
-                }
-            });
-
-        force.on("tick", function () {
-
-            //Source: http://bl.ocks.org/mbostock/1129492
-            node.attr("transform", function (d) {
-                var dx = Math.max(radius, Math.min(width - radius, d.x));
-                var dy = Math.max(radius, Math.min(height - radius, d.y));
-                return "translate(" + dx + "," + dy + ")";
-            });
-
-            link.attr("x1", function (d) {
-                    return d.source.x;
-                })
-                .attr("y1", function (d) {
-                    return d.source.y;
-                })
-                .attr("x2", function (d) {
-                    return d.target.x;
-                })
-                .attr("y2", function (d) {
-                    return d.target.y;
-                });
-
-            //No bounding box implementation
-            /*node.attr("transform", function (d) {
-             return "translate(" + d.x + "," + d.y + ")";
-             });*/
-        })
-    });
-}
-
 function update_graph(filter) {
     $('svg').remove();
     show_graph(filter);
@@ -137,6 +38,103 @@ function size_graph() {
     graph.attr("width", get_width());
 
     graph.attr("height", get_height());
+}
+
+//Taken from: http://bl.ocks.org/mbostock/3750558
+function show_graph() {
+    var width = 960,
+        height = 500;
+
+    var force = d3.layout.force()
+        .size([width, height])
+        .charge(-400)
+        .linkDistance(40)
+        .on("tick", tick);
+
+    var drag = force.drag()
+        .on("dragstart", dragstart);
+
+    var svg = d3.select("#graph_container").append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("id", "graph");
+
+    size_graph();
+
+    width = get_width();
+
+    height = get_height();
+
+    var link = svg.selectAll(".link"),
+        node = svg.selectAll(".node");
+
+    d3.json("/graph-query.json", function (error, graph) {
+        if (error) throw error;
+
+        force
+            .nodes(graph.results.nodes)
+            .links(graph.results.links)
+            .start();
+
+        link = link.data(graph.results.links)
+            .enter().append("line")
+            .attr("class", "link");
+
+        node = node.data(graph.results.nodes)
+            .enter().append("g")
+            .attr("class", "node")
+            .append("circle")
+            .attr("r", 12)
+            .on("dblclick", dblclick)
+            .call(drag);
+
+        node.append("svg:title")
+         .each(function (d) {
+         d3.select(this).text(d.name);
+         });
+    });
+
+    function tick() {
+        link.attr("x1", function (d) {
+                return d.source.x;
+            })
+            .attr("y1", function (d) {
+                return d.source.y;
+            })
+            .attr("x2", function (d) {
+                return d.target.x;
+            })
+            .attr("y2", function (d) {
+                return d.target.y;
+            });
+
+        node.attr("cx", function (d) {
+                return d.x;
+            })
+            .attr("cy", function (d) {
+                return d.y;
+            });
+
+        node.select("text").attr("dx", function (d) {
+           return d.x;
+        }).attr("dy", function (d) {
+           return d.x;
+        });
+    }
+
+    function dblclick(d) {
+        d3.select(this).classed("fixed", d.fixed = false);
+    }
+
+    function dragstart(d) {
+        d3.select(this).classed("fixed", d.fixed = true);
+        d3.select(this.parentNode)
+            .append("text")
+            .text("testing")
+            .attr("dx", d3.select(this).attr("cx"))
+            .attr("dy", d3.select(this).attr("cy"))
+            .attr("text-anchor", "middle");
+    }
 }
 
 $(function () {
