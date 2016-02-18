@@ -129,22 +129,32 @@ function show_graph() {
         d3.select(this.parentNode).select("text").remove();
     }
 
+    function click(d) {
+
+    }
+
     function dragstart(d) {
         d3.select(this).classed("fixed", d.fixed = true);
         d3.select(this.parentNode).select("text").remove();
+        d3.select(this).select("title").text(d.name);
     }
 
     function dragend(d) {
         d3.select(this.parentNode)
             .append("text")
-            .text("testing")
+            .text(d.name)
+            .attr("xlink:href", "/characters/" + d.id)
             .attr("dx", d3.select(this).attr("cx"))
             .attr("dy", d3.select(this).attr("cy"))
             .attr("text-anchor", "middle");
 
         d3.select(this.parentNode)
             .select("text")
-            .attr("y", d3.select(this.parentNode).attr("y") + 20);
+            .attr("y", d3.select(this.parentNode).attr("y") + 20)
+            .append("svg:title")
+            .text(d.short_description);
+
+        d3.select(this).select("title").text(d.short_description);
     }
 }
 
