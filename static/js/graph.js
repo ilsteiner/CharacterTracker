@@ -143,7 +143,6 @@ function show_graph() {
         d3.select(this.parentNode)
             .append("text")
             .text(d.name)
-            .attr("xlink:href", "/characters/" + d.id)
             .attr("dx", d3.select(this).attr("cx"))
             .attr("dy", d3.select(this).attr("cy"))
             .attr("text-anchor", "middle");

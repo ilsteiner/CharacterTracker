@@ -1,2 +1,79 @@
 2016-02-17 19:42:54,956 INFO: errors [in D:\Files\Downloads\CharacterTracker\app.py:236]
 2016-02-17 19:42:55,068 INFO: errors [in D:/Files/Downloads/CharacterTracker/app.py:236]
+2016-02-17 21:31:30,940 INFO: errors [in D:\Files\Downloads\CharacterTracker\app.py:236]
+2016-02-17 21:31:31,065 INFO: errors [in D:/Files/Downloads/CharacterTracker/app.py:236]
+2016-02-17 21:35:32,446 INFO: errors [in D:\Files\Downloads\CharacterTracker\app.py:236]
+2016-02-17 21:35:32,559 INFO: errors [in D:/Files/Downloads/CharacterTracker/app.py:236]
+2016-02-17 21:37:23,200 INFO: errors [in D:\Files\Downloads\CharacterTracker\app.py:236]
+2016-02-17 21:37:23,315 INFO: errors [in D:/Files/Downloads/CharacterTracker/app.py:236]
+2016-02-17 21:37:32,187 ERROR: Exception on /characters/9 [GET] [in C:\Users\Isaac\CharacterTracker\lib\site-packages\flask\app.py:1423]
+Traceback (most recent call last):
+  File "C:\Users\Isaac\CharacterTracker\lib\site-packages\flask\app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\Isaac\CharacterTracker\lib\site-packages\flask\app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\Isaac\CharacterTracker\lib\site-packages\flask\app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\Isaac\CharacterTracker\lib\site-packages\flask\app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Isaac\CharacterTracker\lib\site-packages\flask\app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:/Files/Downloads/CharacterTracker/app.py", line 111, in view_character_name
+    character = session.query(Character).filter(Character.name.is_(character_name)).all()[0]
+IndexError: list index out of range
+2016-02-17 21:38:48,648 INFO: errors [in D:\Files\Downloads\CharacterTracker\app.py:236]
+2016-02-17 21:38:48,776 INFO: errors [in D:/Files/Downloads/CharacterTracker/app.py:236]
+2016-02-17 21:38:57,640 ERROR: Exception on /characters/16 [GET] [in C:\Users\Isaac\CharacterTracker\lib\site-packages\flask\app.py:1423]
+Traceback (most recent call last):
+  File "C:\Users\Isaac\CharacterTracker\lib\site-packages\flask\app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\Isaac\CharacterTracker\lib\site-packages\flask\app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\Isaac\CharacterTracker\lib\site-packages\flask\app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\Isaac\CharacterTracker\lib\site-packages\flask\app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Isaac\CharacterTracker\lib\site-packages\flask\app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:/Files/Downloads/CharacterTracker/app.py", line 111, in view_character_name
+    character = session.query(Character).filter(Character.name.is_(character_name)).all()[0]
+IndexError: list index out of range
+2016-02-17 21:39:00,280 ERROR: Exception on /characters/9 [GET] [in C:\Users\Isaac\CharacterTracker\lib\site-packages\flask\app.py:1423]
+Traceback (most recent call last):
+  File "C:\Users\Isaac\CharacterTracker\lib\site-packages\flask\app.py", line 1817, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\Isaac\CharacterTracker\lib\site-packages\flask\app.py", line 1477, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\Isaac\CharacterTracker\lib\site-packages\flask\app.py", line 1381, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "C:\Users\Isaac\CharacterTracker\lib\site-packages\flask\app.py", line 1475, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\Isaac\CharacterTracker\lib\site-packages\flask\app.py", line 1461, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "D:/Files/Downloads/CharacterTracker/app.py", line 111, in view_character_name
+    character = session.query(Character).filter(Character.name.is_(character_name)).all()[0]
+IndexError: list index out of range
+2016-02-17 21:39:11,319 INFO: errors [in D:\Files\Downloads\CharacterTracker\app.py:236]
+2016-02-17 21:39:11,437 INFO: errors [in D:/Files/Downloads/CharacterTracker/app.py:236]
+2016-02-17 21:39:44,197 INFO: errors [in D:\Files\Downloads\CharacterTracker\app.py:236]
+2016-02-17 21:39:44,319 INFO: errors [in D:/Files/Downloads/CharacterTracker/app.py:236]
+2016-02-17 21:41:07,039 INFO: errors [in D:\Files\Downloads\CharacterTracker\app.py:236]
+2016-02-17 21:41:07,197 INFO: errors [in D:/Files/Downloads/CharacterTracker/app.py:236]
+2016-02-17 21:41:38,835 INFO: errors [in D:\Files\Downloads\CharacterTracker\app.py:236]
+2016-02-17 21:41:38,957 INFO: errors [in D:/Files/Downloads/CharacterTracker/app.py:236]
+2016-02-17 21:41:54,519 INFO: errors [in D:\Files\Downloads\CharacterTracker\app.py:236]
+2016-02-17 21:41:54,631 INFO: errors [in D:/Files/Downloads/CharacterTracker/app.py:236]
+2016-02-17 21:42:22,408 INFO: errors [in D:\Files\Downloads\CharacterTracker\app.py:236]
+2016-02-17 21:42:22,536 INFO: errors [in D:/Files/Downloads/CharacterTracker/app.py:236]
+2016-02-17 21:43:19,585 INFO: errors [in D:\Files\Downloads\CharacterTracker\app.py:236]
+2016-02-17 21:43:19,697 INFO: errors [in D:/Files/Downloads/CharacterTracker/app.py:236]
+2016-02-17 21:45:13,055 INFO: errors [in D:\Files\Downloads\CharacterTracker\app.py:236]
+2016-02-17 21:45:13,168 INFO: errors [in D:/Files/Downloads/CharacterTracker/app.py:236]
+2016-02-17 21:50:57,957 INFO: errors [in D:\Files\Downloads\CharacterTracker\app.py:236]
+2016-02-17 21:50:58,072 INFO: errors [in D:/Files/Downloads/CharacterTracker/app.py:236]
+2016-02-17 21:51:34,309 INFO: errors [in D:\Files\Downloads\CharacterTracker\app.py:236]
+2016-02-17 21:51:34,431 INFO: errors [in D:/Files/Downloads/CharacterTracker/app.py:236]
+2016-02-17 21:53:30,627 INFO: errors [in D:\Files\Downloads\CharacterTracker\app.py:236]
+2016-02-17 21:53:30,753 INFO: errors [in D:/Files/Downloads/CharacterTracker/app.py:236]
+2016-02-17 21:56:56,095 INFO: errors [in D:\Files\Downloads\CharacterTracker\app.py:236]
+2016-02-17 21:56:56,213 INFO: errors [in D:/Files/Downloads/CharacterTracker/app.py:236]

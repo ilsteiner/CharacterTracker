@@ -11,7 +11,7 @@
 }
 
 .node text {
-    stroke: #333;
+    /*stroke: #333;*/
     cursor: pointer;
 }
 
