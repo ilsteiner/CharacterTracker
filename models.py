@@ -13,6 +13,8 @@ filename = os.path.join(current_directory, 'database.db')
 
 engine = create_engine('sqlite:///' + filename)
 
+engine.echo = True
+
 db_session = scoped_session(sessionmaker(autocommit=False,
                                          autoflush=False,
                                          bind=engine))
@@ -103,4 +105,4 @@ def make_graph(names):
     return json_graph.node_link_data(graph)
 
 # Create tables.
-Base.metadata.create_all(bind=engine)
+# Base.metadata.create_all(bind=engine)

@@ -52,7 +52,8 @@ function show_graph() {
         .on("tick", tick);
 
     var drag = force.drag()
-        .on("dragstart", dragstart);
+        .on("dragstart", dragstart)
+        .on("dragend", dragend);
 
     var svg = d3.select("#graph_container").append("svg")
         .attr("width", width)
@@ -116,24 +117,34 @@ function show_graph() {
             });
 
         node.select("text").attr("dx", function (d) {
-           return d.x;
+            console.log(d.element("circle").attr("cx"));
+           return d.element("circle").attr("cx");
         }).attr("dy", function (d) {
-           return d.x;
+           return d.element("circle").attr("cy");
         });
     }
 
     function dblclick(d) {
         d3.select(this).classed("fixed", d.fixed = false);
+        d3.select(this.parentNode).select("text").remove();
     }
 
     function dragstart(d) {
         d3.select(this).classed("fixed", d.fixed = true);
+        d3.select(this.parentNode).select("text").remove();
+    }
+
+    function dragend(d) {
         d3.select(this.parentNode)
             .append("text")
             .text("testing")
             .attr("dx", d3.select(this).attr("cx"))
             .attr("dy", d3.select(this).attr("cy"))
             .attr("text-anchor", "middle");
+
+        d3.select(this.parentNode)
+            .select("text")
+            .attr("y", d3.select(this.parentNode).attr("y") + 20);
     }
 }
 
