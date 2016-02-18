@@ -1,5 +1,5 @@
 (function () {
-    $('select').prepend("<option disabled value='0' selected='selected'>Select an option</option>");
+    $(this).prepend("<option disabled value='0' selected='selected'>Select an option</option>");
 }).call(this);
 
 $(function () {
@@ -52,10 +52,11 @@ function update_list(names) {
             if (typeof item.name != "undefined") {
                 counter++;
                 if(counter <= 5){
-                    name_list_1.append('<li>' + item.name + '</li>');
+                    console.log(item);
+                    name_list_1.append('<li><a href="characters/'+ item.id + '">' + item.name + '</a></li>');
                 }
                 else if(counter <= 9){
-                    name_list_2.append('<li>' + item.name + '</li>');
+                    name_list_2.append('<li><a href="characters/'+ item.id + '">' + item.name + '</a></li>');
                 }
                 else if(counter == 10){
                     name_list_2.append('<li>...</li>');

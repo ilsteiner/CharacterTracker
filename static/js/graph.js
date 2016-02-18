@@ -129,10 +129,6 @@ function show_graph() {
         d3.select(this.parentNode).select("text").remove();
     }
 
-    function click(d) {
-
-    }
-
     function dragstart(d) {
         d3.select(this).classed("fixed", d.fixed = true);
         d3.select(this.parentNode).select("text").remove();

@@ -1,5 +1,13 @@
 $( document ).ready(function() {
     update_triggers();
+    $(".related_to").each(function (d) {
+        var default_value = $("this").attr("default");
+        $(this).children("option").each(function (d) {
+            if($(this).attr("value") == default_value){
+                $(this).setAttribute("selected", "selected");
+            }
+        });
+    });
 });
 
 function update_triggers() {

@@ -98,29 +98,31 @@ def search_characters():
     session.close()
 
     for character in results:
-        characters.append({'name': character.name, 'short_description': character.short_description})
+        characters.append({'id': character.id, 'name': character.name, 'short_description': character.short_description})
 
     return jsonify(characters=characters)
-
-
-@app.route('/characters/<character_name>', methods=['GET'])
-def view_character_name(character_name):
-    character_name = unquote_plus(character_name)
-    session = db_session()
-    print(character_name)
-    character = session.query(Character).filter(Character.name.is_(character_name)).all()[0]
-    session.close()
-    return redirect('/characters/' + str(character.id))
 
 
 @app.route('/characters/<character_id>', methods=['GET', 'POST'])
 def view_character_id(character_id):
     session = db_session()
-    character = session.query(Character).get(character_id)
+    character = session.query(Character).get(int(character_id))
     form = CharacterForm(request.form)
     form.character = character
+    form.name.data = character.name
+    form.short_description.data = character.short_description
+    form.description.data = character.description
+
+    relationships = session.query(Relationship).filter(Relationship.primary == character.id).all()
+    for relationship in relationships:
+        form.relationships.append_entry({'related_to': relationship.related_to,
+                                         'relationship_type': relationship.relationship_type,
+                                         'relationship_description': relationship.relationship_description})
+
+    for relationship in form.relationships:
+        relationship.related_to.query = Character.query
     session.close()
-    return render_template('forms/character.html',form=form)
+    return render_template('forms/character.html', form=form, character_count=character_count())
 
 
 @app.route('/new-character', methods=['GET', 'POST'])

@@ -71,7 +71,7 @@
                                 <div class="row">
                                     <div class="col-md-5">
                                         <label for="related_to">Has a relationship with</label>
-                                        {{ relationship.related_to(class = 'form-control related_to') }}
+                                        {{ relationship.related_to(class = 'form-control related_to', default = relationship.related_to.data) }}
                                     </div>
                                     <div class="col-md-5">
                                         <label for="relationship_type">Relationship Type</label>
@@ -126,7 +126,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                <input type="submit" value="Create Character" class="btn btn-primary btn-lg btn-block">
+                <input type="submit" value="Save Character" class="btn btn-primary btn-lg btn-block">
             </div>
         </div>
     </form>
