@@ -13,6 +13,12 @@ $( document ).ready(function() {
 
         update_legends($(this));
     });
+
+    $(".collapse.relationship-section").each(function (d) {
+       if($(this).attr("id") != "collapse-0") {
+           $(this).collapse();
+       }
+    });
 });
 
 function update_triggers() {

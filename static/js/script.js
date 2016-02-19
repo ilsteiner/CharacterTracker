@@ -48,7 +48,6 @@ function update_list(names) {
             if (typeof item.name != "undefined") {
                 counter++;
                 if(counter <= 5){
-                    console.log(item);
                     name_list_1.append('<li><a href="characters/'+ item.id + '">' + item.name + '</a></li>');
                 }
                 else if(counter <= 9){
