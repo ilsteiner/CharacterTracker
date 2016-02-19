@@ -1,10 +1,15 @@
 $( document ).ready(function() {
     update_triggers();
-    $(".related_to").each(function (d) {
-        var default_value = $("this").attr("default");
+
+    $("select.related_to").prepend("<option disabled value='0' selected='selected'>Select an option</option>");
+
+    $("select.related_to").each(function (d) {
+        var default_value = parseInt($(this).attr("default"));
+        console.log(default_value);
         $(this).children("option").each(function (d) {
-            if($(this).attr("value") == default_value){
-                $(this).setAttribute("selected", "selected");
+            if(parseInt($(this).attr("value")) === default_value){
+                console.log(parseInt($(this).attr("value")));
+                $(this).parent().val(default_value);
             }
         });
     });

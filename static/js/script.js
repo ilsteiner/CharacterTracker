@@ -1,7 +1,3 @@
-(function () {
-    $(this).prepend("<option disabled value='0' selected='selected'>Select an option</option>");
-}).call(this);
-
 $(function () {
     if ($('search-characters')) {
         var search_form = $('#name, #description_snippet')
