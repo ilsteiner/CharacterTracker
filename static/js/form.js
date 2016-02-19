@@ -5,36 +5,19 @@ $( document ).ready(function() {
 
     $("select.related_to").each(function (d) {
         var default_value = parseInt($(this).attr("default"));
-        console.log(default_value);
         $(this).children("option").each(function (d) {
             if(parseInt($(this).attr("value")) === default_value){
-                console.log(parseInt($(this).attr("value")));
                 $(this).parent().val(default_value);
             }
         });
+
+        update_legends($(this));
     });
 });
 
 function update_triggers() {
     //Change related to label when selecting a new relationship
     $('.related_to').change(function() {
-        /*var current_id = $(this).attr('id').match(/\d+/)[0];
-
-        if($('#name') === "" || $(this).children('option:selected').text() == 'Select an option'){
-            $('#sublegend-' + current_id).html("New Relationship");
-            $('#bidirectional-legend-' + current_id).text("Bidirectional Relationship");
-        }
-
-        else{
-            $('#sublegend-' + current_id).html(possesive_name($('#name').val())
-            + ' relationship with '
-            + $(this).children('option:selected').text());
-
-        $('#bidirectional-legend-' + current_id).text(possesive_name($(this).children('option:selected').text())
-            + " relationship with "
-            + $('#name').val());
-        }*/
-
         update_legends($(this));
     });
 

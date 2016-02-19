@@ -114,6 +114,7 @@ def view_character_id(character_id):
     form.description.data = character.description
 
     relationships = session.query(Relationship).filter(Relationship.primary == character.id).all()
+
     for relationship in relationships:
         form.relationships.append_entry({'related_to': relationship.related_to,
                                          'relationship_type': relationship.relationship_type,
@@ -121,6 +122,7 @@ def view_character_id(character_id):
 
     for relationship in form.relationships:
         relationship.related_to.query = Character.query
+
     session.close()
     return render_template('forms/character.html', form=form, character_count=character_count())
 
