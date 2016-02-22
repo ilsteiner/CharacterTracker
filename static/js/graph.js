@@ -96,13 +96,11 @@ function show_graph() {
             .append("svg:path")
             .attr("d", "M0,-5L10,0L0,5");
 
-        link.attr("marker-start", function (d) {
-            if (d.bidirectional) {
-                return 'url(#arrow)';
-            }
-            else {
-                return '';
-            }
+        //Add arrows for bidirectional relationships
+        link.each(function (d) {
+           if(this.bidirectional){
+               this.attr("marker-start", "url(arrow)");
+           }
         });
 
         link.attr("class", function (d) {

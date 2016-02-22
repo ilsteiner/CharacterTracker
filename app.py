@@ -288,7 +288,8 @@ def populate_sample_data():
 
             for related_character in related_characters:
                 relationship = Relationship(character.id, related_character.id, 'Friend', 'They are just friends')
-                session.add(relationship)
+                if related_character.id != character.id:
+                    session.add(relationship)
                 session.commit()
 
         session.close()
