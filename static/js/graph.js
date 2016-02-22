@@ -173,7 +173,10 @@ function show_graph() {
             .text(d.name)
             .attr("dx", d3.select(this).attr("cx"))
             .attr("dy", d3.select(this).attr("cy"))
-            .attr("text-anchor", "middle");
+            .attr("text-anchor", "middle")
+            .on("click", function (d) {
+                window.open("characters/" + d.id);
+            });
 
         d3.select(this.parentNode)
             .select("text")
