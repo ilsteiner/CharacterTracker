@@ -77,9 +77,43 @@ function show_graph() {
             .links(graph.results.links)
             .start();
 
+        //Build arrows
+        svg.append("svg:defs").selectAll("marker")
+            .data(["arrow"])
+            .enter().append("svg:marker")
+            .attr("id", String)
+            .attr("viewBox", "0 -5 10 10")
+            .attr("refX", 22)
+            .attr("refY", 0)
+            .attr("markerWidth", 10)
+            .attr("markerHeight", 10)
+            .attr("orient", "auto")
+            .append("svg:path")
+            .attr("d", "M0,-5L10,0L0,5");
+
+
         link = link.data(graph.results.links)
             .enter().append("line")
-            .attr("class", "link");
+            .attr("class", "link")
+            .attr("marker-end", "url(#arrow)");
+
+        link.attr("class", function (d) {
+            if (d.bidirectional) {
+                return 'link bidirectional';
+            }
+            else {
+                return 'link';
+            }
+        });
+
+        link.attr("marker-start", function (d) {
+            if (d.bidirectional) {
+                return 'url(#arrow)';
+            }
+            else {
+                return '';
+            }
+        });
 
         node = node.data(graph.results.nodes)
             .enter().append("g")
@@ -89,10 +123,11 @@ function show_graph() {
             .on("dblclick", dblclick)
             .call(drag);
 
+        //Add tooltips
         node.append("svg:title")
-         .each(function (d) {
-         d3.select(this).text(d.name);
-         });
+            .each(function (d) {
+                d3.select(this).text(d.name);
+            });
     });
 
     function tick() {
@@ -118,9 +153,9 @@ function show_graph() {
 
         node.select("text").attr("dx", function (d) {
             console.log(d.element("circle").attr("cx"));
-           return d.element("circle").attr("cx");
+            return d.element("circle").attr("cx");
         }).attr("dy", function (d) {
-           return d.element("circle").attr("cy");
+            return d.element("circle").attr("cy");
         });
     }
 

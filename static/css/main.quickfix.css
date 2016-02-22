@@ -10,6 +10,14 @@
     stroke: #aaa;
 }
 
+.link.bidirectional {
+    stroke: #2074ff;
+}
+
+marker#arrow {
+    fill: #303030;
+}
+
 .node text {
     /*stroke: #333;*/
     cursor: pointer;

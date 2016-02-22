@@ -86,15 +86,19 @@ def make_graph(names):
     for character in characters:
         relationships = session.query(Relationship).filter(Relationship.primary == character.id)
 
-        # relationship_dict = dict()
-
         graph.add_node(character.id, {"name": character.name,
                                       "description": character.description,
                                       "short_description": character.short_description
                                       })
 
         for relationship in relationships:
-            graph.add_edge(relationship.primary, relationship.related_to)
+            relationship_with = session.query(Relationship).filter(Relationship.related_to == character.id,
+                                                                    Relationship.primary == relationship.related_to).count()
+
+            if relationship_with > 0:
+                graph.add_edge(relationship.primary, relationship.related_to, bidirectional=True)
+            else:
+                graph.add_edge(relationship.primary, relationship.related_to, bidirectional=False)
 
             # related_to_name = session.query(Character).get(relationship.related_to).name
             #
