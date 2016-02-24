@@ -125,9 +125,32 @@
         {% endif %}
 
         <div class="row">
-            <div class="col-md-12">
-                <input type="submit" value="Save Character" class="btn btn-primary btn-lg btn-block">
-            </div>
+            {% if form.character != None %}
+                <div class="col-md-8">
+                    <button type="submit" value="Save Character" class="btn btn-primary btn-lg btn-block">
+                        <span class="glyphicon glyphicon-align-left hidden"></span>
+                        <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
+                        Save Character
+                    </button>
+                </div>
+
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-default btn-lg btn-block">
+                        <span class="glyphicon glyphicon-align-left hidden"></span>
+                        <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+                        Export
+                    </button>
+                </div>
+            {% else %}
+                <div class="col-md-12">
+                    <button type="submit" value="Save Character" class="btn btn-primary btn-lg btn-block">
+                        <span class="glyphicon glyphicon-align-left hidden"></span>
+                        <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
+                        Save Character
+                    </button>
+                    {#<input type="submit" value="Save Character" class="btn btn-primary btn-lg btn-block">#}
+                </div>
+            {% endif %}
         </div>
     </form>
 {% endblock %}

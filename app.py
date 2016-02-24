@@ -127,7 +127,6 @@ def view_character_id(character_id):
 
         for reverse_relationship in reverse_relationships:
             if reverse_relationship.primary == relationship.related_to:
-                # print(('*' * 10) + str(reverse_relationship.primary) + ": " + str(relationship.related_to) + ('*' * 10))
                 reverse_relationship_type = reverse_relationship.relationship_type
                 reverse_relationship_description = reverse_relationship.relationship_description
 
@@ -166,7 +165,6 @@ def new_character():
         try:
             session.add(character)
             session.commit()
-            session.refresh(character)
             flash(character.name + ' created')
 
             # If there are characters to be related to and thus the relationship form was displayed

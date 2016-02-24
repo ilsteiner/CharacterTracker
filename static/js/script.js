@@ -1,6 +1,6 @@
 $(function () {
     if ($('search-characters')) {
-        var search_form = $('#name, #description_snippet')
+        var search_form = $('#search-characters #name, #search-characters #description_snippet')
 
         search_form.on('input', function () {
             submit_search(function (names) {
