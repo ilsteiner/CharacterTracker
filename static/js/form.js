@@ -14,15 +14,13 @@ $( document ).ready(function() {
         update_legends($(this));
     });
 
+    $("input.bidirectional:checked").each(function (d){
+        var the_id = $(this).attr('id').match(/\d+/)[0];
+        $('#bidirectional-' + the_id).collapse('toggle');
+    });
+
     //Collapse existing relationship sections
     $(".collapse.relationship-section").each(function (d) {
-        if($(this).children('div.btn-success').length > 0){
-            console.log('Show it')
-        }
-        else {
-            console.log('hide it');
-        }
-
        if($(this).attr("id") != "collapse-0") {
            $(this).collapse();
        }
